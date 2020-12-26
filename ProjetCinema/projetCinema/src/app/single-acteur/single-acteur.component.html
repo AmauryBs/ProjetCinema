@@ -1,0 +1,6 @@
+<li class="list-group-item">
+    <h3>{{ acteur.nomAct }}  {{ acteur.prenAct }}</h3>
+    <p></p>
+     <p>Date de naissance: {{ acteur.dateNaiss | date:'d MMMM y' }} </p>
+     <p [hidden]="acteur.dateDeces == null">Date deces: {{ acteur.dateDeces | date:'d MMMM y' }} </p>
+</li>

@@ -1,0 +1,7 @@
+<li class="list-group-item">
+    <h3>{{ nom }}  {{ prenom }}</h3>
+    <p></p>
+     <p>Date de naissance: {{ dateNaiss | date:'d MMMM y' }} </p>
+     <p [hidden]="dateDeces == null">Date deces: {{ dateDeces | date:'d MMMM y' }} </p>
+    <a [routerLink]="[id]">Détail</a>
+</li>

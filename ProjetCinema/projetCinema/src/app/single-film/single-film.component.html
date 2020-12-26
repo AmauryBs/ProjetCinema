@@ -1,0 +1,9 @@
+<h3>{{ film.titre }}</h3>
+<p></p>
+<p>{{ film.realisateur.PrenRea }} {{ film.realisateur.NomRea | uppercase}} &nbsp;&nbsp;&nbsp;&nbsp; Durée: {{ film.duree }} min</p>
+<p>Date de sortie: {{ film.dateSortie | date:'d MMMM y' | date:'d MMMM y' }} </p>
+<p>Genre: {{film.categorie.LibelleCat}}</p>
+<p>Budget: {{film.budget}}€ &nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>Recette: {{film.montantRecette}} €</p>
+<img src="{{film.categorie.image}}">
+<a routerLink="/films">Retour à la liste</a>

@@ -30,7 +30,7 @@ public class Acteur implements Serializable {
     @Column(name = "DateDeces",columnDefinition="date DEFAULT NULL")
     private Date DateDeces;
 
-    public long getNoAct(){
+    public int getNoAct(){
         return this.NoAct;
     }
 

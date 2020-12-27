@@ -40,4 +40,9 @@ public class PersonnageService {
     public void supprPersonnage(int noFilm, int noAct) {
         this.persRepo.supprPers(noFilm, noAct);
     }
+
+    public void updateClient(int noFilm, int noAct, String nomPers) {
+        this.persRepo.supprPers(noFilm, noAct);
+        this.persRepo.addPersWithParams(noFilm, noAct,nomPers);
+    }
 }

@@ -98,4 +98,22 @@ public class PersonnageController {
             ResponseEntity.notFound().build();
         }
     }
+
+
+    @PutMapping("/modifPersonnage")
+    public void updateClient(@RequestParam("noFilm") int noFilm,@RequestParam("noAct") int noAct,@RequestParam("nomPers") String nomPers)
+    {
+        try {
+            persService.updateClient(noFilm,noAct,nomPers);
+        }
+        catch (MonException e) {
+
+            ResponseEntity.notFound().build();
+        }
+        catch (Exception e) {
+
+            ResponseEntity.notFound().build();
+        }
+
+    }
 }

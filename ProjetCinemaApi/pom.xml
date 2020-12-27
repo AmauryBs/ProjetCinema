@@ -10,10 +10,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>com.webservice</groupId>
-    <artifactId>CinemaEpul</artifactId>
+    <groupId>com.webservice.projetcinema</groupId>
+    <artifactId>ProjetCinemaAPI</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>CinemaEpul</name>
+    <name>ProjetCinemaAPI</name>
 
     <properties>
         <junit.version>5.7.0</junit.version>

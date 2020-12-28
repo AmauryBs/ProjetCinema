@@ -19,6 +19,7 @@ import { FilmComponent } from './film/film.component';
 import { ActeurComponent } from './acteur/acteur.component';
 import { ActeurListComponent } from './acteur-list/acteur-list.component';
 import { SingleActeurComponent } from './single-acteur/single-acteur.component';
+import { ModifPersoComponent } from './modif-perso/modif-perso.component';
 
 @NgModule({
   declarations: [
@@ -30,12 +31,13 @@ import { SingleActeurComponent } from './single-acteur/single-acteur.component';
     ActeurComponent,
     ActeurListComponent,
     SingleActeurComponent,
-    SingleFilmComponent
+    SingleFilmComponent,
+    ModifPersoComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [AuthService, AuthGuard,FilmService,ActeurService],
   bootstrap: [AppComponent]

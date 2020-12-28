@@ -7,6 +7,7 @@ import { FilmListComponent } from './film-list/film-list.component';
 import { SingleFilmComponent } from './single-film/single-film.component';
 import { ActeurListComponent } from './acteur-list/acteur-list.component';
 import { SingleActeurComponent } from './single-acteur/single-acteur.component';
+import { ModifPersoComponent } from './modif-perso/modif-perso.component';
 
 
 const appRoutes: Routes = [
@@ -15,8 +16,8 @@ const appRoutes: Routes = [
   { path: 'films/:id', canActivate: [AuthGuard],component: SingleFilmComponent },
   { path: 'acteurs', canActivate: [AuthGuard],component: ActeurListComponent },
   { path: 'acteurs/:id', canActivate: [AuthGuard],component:SingleActeurComponent },
-
-  { path: '', component:  FilmListComponent},
+  { path: 'updatePerso/:id', canActivate: [AuthGuard],component:ModifPersoComponent },
+  { path: '', canActivate: [AuthGuard],component:  FilmListComponent},
   { path: 'not-found', component: FourOhFourComponent },
   { path: '**', redirectTo: 'not-found' },
 

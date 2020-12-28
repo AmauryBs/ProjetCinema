@@ -25,5 +25,8 @@ export class FilmService {
     );
     return film;
 }
+  getFilmList(){
 
+    return [{noFilm:1,titre:'Léon'},{noFilm:2,titre:'Léa'}]
+  }
 }

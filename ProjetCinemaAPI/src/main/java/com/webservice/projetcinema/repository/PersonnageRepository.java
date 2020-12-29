@@ -4,7 +4,6 @@ import com.webservice.projetcinema.model.Personnage;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,14 +38,9 @@ public interface PersonnageRepository extends JpaRepository<Personnage, Long> {
     @Transactional
     void supprPers(int noFilm, int noAct);
 
-
-    @Modifying
-    @Transactional
-    @Query("UPDATE Personnage P " +
-            "SET P.film= (select F.NoFilm from Film F where F.NoFilm=:noFilm ) ," +
-            " P.act= (select A.NoAct from Acteur A where A.NoAct=:noAct ) ," +
-            " P.NomPers= :persNom")
-    int  modifPers(@Param("noFilm") int noFilm,
-                             @Param("noAct") int noAct,
-                             @Param("persNom") String persNom);
+    @Query("Select P.NomPers " +
+            " from Personnage P" +
+            " where P.act.NoAct=:noAct and P.film.NoFilm=:noFilm"
+    )
+    List<Personnage> getPersonnageFromIds(int noFilm, int noAct);
 }

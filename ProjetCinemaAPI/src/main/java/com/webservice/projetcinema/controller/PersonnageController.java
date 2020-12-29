@@ -35,6 +35,20 @@ public class PersonnageController {
         return mesPersos;
     }
 
+    @PostMapping("/getPersonnageFromIds")
+    public List<Personnage> findPersonnageFromIds(@RequestParam("noFilm") int noFilm,@RequestParam("noAct") int noAct) {
+        String destinationPage = "";
+        List<Personnage> mesPersos = null;
+        try {
+            mesPersos = persService.getPersonnageFromIds(noFilm,noAct);
+        } catch (MonException e) {
+            ResponseEntity.notFound().build();
+        }catch (Exception e) {
+            ResponseEntity.notFound().build();
+        }
+        return mesPersos;
+    }
+
     @GetMapping("/getPersonnages/acteur/{nomAct}")
     public List<Personnage> findAllPersonnagesOfActeur(@PathVariable(value = "nomAct") String nomAct) {
         String destinationPage = "";
@@ -101,10 +115,10 @@ public class PersonnageController {
 
 
     @PutMapping("/modifPersonnage")
-    public void updateClient(@RequestParam("noFilm") int noFilm,@RequestParam("noAct") int noAct,@RequestParam("nomPers") String nomPers)
+    public void updatePersonnage(@RequestParam("noFilm") int noFilm,@RequestParam("noAct") int noAct,@RequestParam("nomPers") String nomPers)
     {
         try {
-            persService.updateClient(noFilm,noAct,nomPers);
+            persService.updatePersonnage(noFilm,noAct,nomPers);
         }
         catch (MonException e) {
 

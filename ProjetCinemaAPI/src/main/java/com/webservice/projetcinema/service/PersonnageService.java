@@ -41,8 +41,12 @@ public class PersonnageService {
         this.persRepo.supprPers(noFilm, noAct);
     }
 
-    public void updateClient(int noFilm, int noAct, String nomPers) {
+    public void updatePersonnage(int noFilm, int noAct, String nomPers) {
         this.persRepo.supprPers(noFilm, noAct);
         this.persRepo.addPersWithParams(noFilm, noAct,nomPers);
+    }
+
+    public List<Personnage> getPersonnageFromIds(int noFilm, int noAct) {
+        return this.persRepo.getPersonnageFromIds(noFilm,noAct);
     }
 }

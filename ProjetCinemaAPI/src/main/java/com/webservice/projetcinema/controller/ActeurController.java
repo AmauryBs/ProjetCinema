@@ -6,6 +6,7 @@ import com.webservice.projetcinema.service.ActeurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,6 +30,20 @@ public class ActeurController {
         List<Acteur> mesActeurs = null;
         try {
             mesActeurs = actService.getAllActeurs();
+        } catch (MonException e) {
+            ResponseEntity.notFound().build();
+        }catch (Exception e) {
+            ResponseEntity.notFound().build();
+        }
+        return mesActeurs;
+    }
+
+    @GetMapping("/getActeur/{noAct}")
+    public List<Acteur> findActeurById(@PathVariable(value = "noAct") int noAct) {
+        String destinationPage = "";
+        List<Acteur> mesActeurs = null;
+        try {
+            mesActeurs = actService.getActeurById(noAct);
         } catch (MonException e) {
             ResponseEntity.notFound().build();
         }catch (Exception e) {

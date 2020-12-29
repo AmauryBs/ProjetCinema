@@ -11,9 +11,9 @@ import java.util.List;
 public interface ActeurRepository extends JpaRepository<Acteur, Integer> {
 
 
-    @Query("Select A.NoAct,A.NomAct,A.PrenAct,A.DateNaiss,A.DateDeces" +
+    /*@Query("Select A.NoAct,A.NomAct,A.PrenAct,A.DateNaiss,A.DateDeces" +
             " from Acteur A" +
             " where A.NoAct=:noAct"
     )
-    List<Acteur> findActeurById(int noAct);
+    List<Acteur> findActeurById(int noAct);*/
 }

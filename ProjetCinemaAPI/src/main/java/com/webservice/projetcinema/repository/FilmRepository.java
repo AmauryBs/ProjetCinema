@@ -45,10 +45,11 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
     List<Film> getAllFilmsByTitle(String titre);
 
 
-    @Query("Select F.NoFilm,F.Titre,F.Budget,F.Duree,F.MontantRecette,F.DateSortie,F.cat,F.rea " +
+    @Query(value="Select F.NoFilm,F.Titre,F.Budget,F.Duree,F.MontantRecette,F.DateSortie,F.CodeCat,F.NoRea " +
             " from Film F" +
-            " join Realisateur R on R.NoRea =F.rea.NoRea" +
-            " where R.NomRea LIKE %:nomRea% and R.PrenRea LIKE %:prenRea%"
+            " join Realisateur R on R.NoRea =F.NoRea" +
+            " where R.NomRea LIKE %:nomRea% and R.PrenRea LIKE %:prenRea%",
+            nativeQuery = true
     )
     List<Film> getAllFilmsByRealisateur(String nomRea, String prenRea);
 

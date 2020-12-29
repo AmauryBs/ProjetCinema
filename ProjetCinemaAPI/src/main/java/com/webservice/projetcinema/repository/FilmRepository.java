@@ -11,7 +11,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Repository
-public interface FilmRepository extends JpaRepository<Film, Long> {
+public interface FilmRepository extends JpaRepository<Film, Integer> {
 
 
 

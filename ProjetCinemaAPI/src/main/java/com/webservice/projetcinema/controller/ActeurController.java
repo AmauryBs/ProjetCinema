@@ -37,9 +37,9 @@ public class ActeurController {
     }
 
     @GetMapping("/getActeur/{noAct}")
-    public List<Acteur> findActeurById(@PathVariable(value = "noAct") int noAct) {
+    public Acteur findActeurById(@PathVariable(value = "noAct") int noAct) {
         String destinationPage = "";
-        List<Acteur> mesActeurs = null;
+        Acteur mesActeurs = null;
         try {
             mesActeurs = actService.getActeurById(noAct);
         } catch (MonException e) {

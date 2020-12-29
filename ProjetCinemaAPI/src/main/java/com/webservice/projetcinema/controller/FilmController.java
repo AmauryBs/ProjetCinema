@@ -70,17 +70,18 @@ public class FilmController {
     }
 
     @GetMapping("/getFilm/{idFilm}")
-    public List<Film> findFilmById(@PathVariable(value = "idFilm") int idFilm) {
+    public Film findFilmById(@PathVariable(value = "idFilm") int idFilm) {
         String destinationPage = "";
         System.out.println("idFilm : " + idFilm);
-        List<Film> monFilm = null;
+        Film monFilm = null;
         try {
-            monFilm = filmService.getFilmById(idFilm);
+            monFilm =  filmService.getFilmById(idFilm);
         } catch (MonException e) {
             ResponseEntity.notFound().build();
         }catch (Exception e) {
             ResponseEntity.notFound().build();
         }
+        System.out.println("idFilm ? : " + monFilm);
         return monFilm;
     }
 

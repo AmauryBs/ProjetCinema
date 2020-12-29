@@ -1,5 +1,6 @@
 package com.webservice.projetcinema.service;
 
+import com.webservice.projetcinema.exceptions.MonException;
 import com.webservice.projetcinema.model.Film;
 import com.webservice.projetcinema.repository.FilmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class FilmService {
@@ -30,8 +30,10 @@ public class FilmService {
         return this.filmRepo.getAllFilmsByActeur(nomAct,prenAct);
     }
 
-    public List<Film> getFilmById(int idFilm) {
-        return this.filmRepo.getFilmById(idFilm);
+    public Film getFilmById(int idFilm) {
+        return this.filmRepo.findById(idFilm).orElseThrow(
+                () -> new MonException("Film", "id", idFilm)
+        );
     }
 
     public List<Film> getAllFilmsByTitle(String titre) {

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ActeurRepository extends JpaRepository<Acteur, Long> {
+public interface ActeurRepository extends JpaRepository<Acteur, Integer> {
 
 
     @Query("Select A.NoAct,A.NomAct,A.PrenAct,A.DateNaiss,A.DateDeces" +

@@ -1,5 +1,6 @@
 package com.webservice.projetcinema.service;
 
+import com.webservice.projetcinema.exceptions.MonException;
 import com.webservice.projetcinema.model.Acteur;
 import com.webservice.projetcinema.repository.ActeurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,9 @@ public class ActeurService {
         return actRepo.findAll();
     }
 
-    public List<Acteur> getActeurById(int noAct) {
-        return actRepo.findActeurById(noAct);
+    public Acteur getActeurById(int noAct) {
+        return this.actRepo.findById(noAct).orElseThrow(
+                () -> new MonException("Acteur", "id", noAct)
+        );
     }
 }

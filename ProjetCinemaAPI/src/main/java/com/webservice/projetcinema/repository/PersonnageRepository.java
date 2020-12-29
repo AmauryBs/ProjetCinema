@@ -16,9 +16,9 @@ public interface PersonnageRepository extends JpaRepository<Personnage, Long> {
     @Query("Select P.act,P.NomPers " +
             " from Personnage P" +
             " join Acteur A on P.act.NoAct=A.NoAct"+
-            " where A.NomAct =:nomAct or A.PrenAct =:nomAct"
+            " where A.NomAct =:nomAct"
     )
-    List<Personnage> getAllPersonnagesOfActeur(String nomAct);
+    List<Personnage> getAllPersonnagesOfActeurName(String nomAct);
 
 
 
@@ -43,4 +43,19 @@ public interface PersonnageRepository extends JpaRepository<Personnage, Long> {
             " where P.act.NoAct=:noAct and P.film.NoFilm=:noFilm"
     )
     List<Personnage> getPersonnageFromIds(int noFilm, int noAct);
+
+
+
+    @Query("Select P.act.NoAct,P.film.NoFilm,P.NomPers " +
+            " from Personnage P" +
+            " where P.film.NoFilm=:noFilm"
+    )
+    List<Personnage> getAllPersonnagesOfFilm(int noFilm);
+
+
+    @Query("Select P.act.NoAct,P.film.NoFilm,P.NomPers " +
+            " from Personnage P" +
+            " where P.act.NoAct=:noAct"
+    )
+    List<Personnage> getAllPersonnagesOfActeur(int noAct);
 }

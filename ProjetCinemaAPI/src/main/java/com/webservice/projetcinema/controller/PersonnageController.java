@@ -50,12 +50,12 @@ public class PersonnageController {
         return mesPersos;
     }
 
-    @GetMapping("/getPersonnages/acteur/{nomAct}")
-    public List<Personnage> findAllPersonnagesOfActeur(@PathVariable(value = "nomAct") String nomAct) {
+    @GetMapping("/getPersonnages/acteur/name/{nomAct}")
+    public List<Personnage> findAllPersonnagesOfActeurName(@PathVariable(value = "nomAct") String nomAct) {
         String destinationPage = "";
         List<Personnage> mesPersos = null;
         try {
-            mesPersos = persService.getAllPersonnagesOfActeur(nomAct);
+            mesPersos = persService.getAllPersonnagesOfActeurName(nomAct);
         } catch (MonException e) {
             ResponseEntity.notFound().build();
         }catch (Exception e) {
@@ -64,6 +64,33 @@ public class PersonnageController {
         return mesPersos;
     }
 
+    @GetMapping("/getPersonnages/film/{noFilm}")
+    public List<Personnage> findAllPersonnagesOfFilm(@PathVariable(value = "noFilm") int noFilm) {
+        String destinationPage = "";
+        List<Personnage> mesPersos = null;
+        try {
+            mesPersos = persService.getAllPersonnagesOfFilm(noFilm);
+        } catch (MonException e) {
+            ResponseEntity.notFound().build();
+        }catch (Exception e) {
+            ResponseEntity.notFound().build();
+        }
+        return mesPersos;
+    }
+
+    @GetMapping("/getPersonnages/acteur/{noAct}")
+    public List<Personnage> findAllPersonnagesOfActeur(@PathVariable(value = "noAct") int noAct) {
+        String destinationPage = "";
+        List<Personnage> mesPersos = null;
+        try {
+            mesPersos = persService.getAllPersonnagesOfActeur(noAct);
+        } catch (MonException e) {
+            ResponseEntity.notFound().build();
+        }catch (Exception e) {
+            ResponseEntity.notFound().build();
+        }
+        return mesPersos;
+    }
     @PostMapping("/ajoutPersonnageObjet")
     public void ajouterUnPersonnage(@RequestBody Personnage unPers) {
         String destinationPage = "";

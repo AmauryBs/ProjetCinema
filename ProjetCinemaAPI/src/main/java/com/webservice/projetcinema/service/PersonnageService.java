@@ -21,8 +21,8 @@ public class PersonnageService {
         return persRepo.findAll();
     }
 
-    public List<Personnage> getAllPersonnagesOfActeur(String nomAct) {
-        return persRepo.getAllPersonnagesOfActeur(nomAct);
+    public List<Personnage> getAllPersonnagesOfActeurName(String nomAct) {
+        return persRepo.getAllPersonnagesOfActeurName(nomAct);
     }
 
     public void addPersonnageObjet(Personnage unPers) {
@@ -48,5 +48,13 @@ public class PersonnageService {
 
     public List<Personnage> getPersonnageFromIds(int noFilm, int noAct) {
         return this.persRepo.getPersonnageFromIds(noFilm,noAct);
+    }
+
+    public List<Personnage> getAllPersonnagesOfFilm(int noFilm) {
+        return this.persRepo.getAllPersonnagesOfFilm(noFilm);
+    }
+
+    public List<Personnage> getAllPersonnagesOfActeur(int noAct) {
+        return persRepo.getAllPersonnagesOfActeur(noAct);
     }
 }

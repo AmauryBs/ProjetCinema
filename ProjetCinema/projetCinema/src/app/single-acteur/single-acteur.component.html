@@ -1,6 +1,30 @@
-<li class="list-group-item">
+<ul class="list-group-item">
     <h3>{{ acteur.nomAct }}  {{ acteur.prenAct }}</h3>
     <p></p>
      <p>Date de naissance: {{ acteur.dateNaiss | date:'d MMMM y' }} </p>
      <p [hidden]="acteur.dateDeces == null">Date deces: {{ acteur.dateDeces | date:'d MMMM y' }} </p>
-</li>
+     <br>
+    <h4>Personnages joués: </h4>
+    <button mat-button mat-flat-button color="primary" routerLink="/updateCli/">Add Row</button>
+    <table class="table" #mytable>
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Film</th>
+            <th scope="col">Personnage</th>
+            <th scope="col">Options</th>
+        </tr>
+        </thead>
+    <tbody>
+        <tr *ngFor="let film of films">
+            <td>{{ film.titre }}</td>
+            <td>{{ film.nomPerso }}</td>
+            <td>
+                <a routerLink="./" (click) ="update(film)" class="btn btn-default btn-sm">Edit</a>
+                <a routerLink="./" (click) ="remove(film)" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<a routerLink="/acteurs">retour à la liste</a>
+</ul>

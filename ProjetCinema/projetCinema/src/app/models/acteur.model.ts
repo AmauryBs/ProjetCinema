@@ -5,7 +5,7 @@ export class Acteur {
         public  nomAct : string,
         public  prenAct: string,
         public  dateNaiss: Date,
-        public  dateDeces: Date
+        public  dateDeces: Date,
     ){}
     }
        

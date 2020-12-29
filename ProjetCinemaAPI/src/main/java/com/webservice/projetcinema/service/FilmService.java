@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FilmService {
@@ -23,7 +24,20 @@ public class FilmService {
     public List<Film> getAllFilmsByCat(String codeCat) {
         return filmRepo.getAllFilmsByCat(codeCat);
     }
-    public List<Film> getAllFilmsByActeur(String nomAct) {
-        return filmRepo.getAllFilmsByActeur(nomAct);
+
+    public List<Film> getAllFilmsByActeur(String nomAct, String prenAct) {
+        return filmRepo.getAllFilmsByActeur(nomAct,prenAct);
+    }
+
+    public List<Film> getFilmById(int idFilm) {
+        return filmRepo.getFilmById(idFilm);
+    }
+
+    public List<Film> getAllFilmsByTitle(String titre) {
+        return filmRepo.getAllFilmsByTitle(titre);
+    }
+
+    public List<Film> getAllFilmsByRealisateur(String nomRea, String prenRea) {
+        return filmRepo.getAllFilmsByRealisateur(nomRea,prenRea);
     }
 }

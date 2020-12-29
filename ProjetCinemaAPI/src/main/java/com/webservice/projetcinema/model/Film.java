@@ -8,7 +8,6 @@ import java.sql.Date;
 @Table(name = "film")
 public class Film implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "NoFilm", columnDefinition="int(4) NOT NULL AUTO_INCREMENT",nullable = false, unique = true)
     private int NoFilm;
 

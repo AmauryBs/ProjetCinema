@@ -20,4 +20,8 @@ public class ActeurService {
     public List<Acteur> getAllActeurs() {
         return actRepo.findAll();
     }
+
+    public List<Acteur> getActeurById(int noAct) {
+        return actRepo.findActeurById(noAct);
+    }
 }

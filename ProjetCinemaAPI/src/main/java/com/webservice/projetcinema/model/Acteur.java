@@ -9,7 +9,6 @@ import java.util.Date;
 public class Acteur implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "NoAct",columnDefinition="int(2) NOT NULL AUTO_INCREMENT", unique = true, updatable = false)
     private int NoAct;
 

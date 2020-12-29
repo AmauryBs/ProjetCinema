@@ -2,11 +2,13 @@ package com.webservice.projetcinema.controller;
 
 import com.webservice.projetcinema.model.Film;
 import com.webservice.projetcinema.exceptions.MonException;
+import com.webservice.projetcinema.model.Personnage;
 import com.webservice.projetcinema.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -109,5 +111,69 @@ public class FilmController {
             ResponseEntity.notFound().build();
         }
         return mesFilms;
+    }
+
+
+    @PostMapping("/ajoutFilm")
+    public void ajouterUnFilm(
+                                    @RequestParam("titre") String titre,
+                                    @RequestParam("duree") int duree,
+                                    @RequestParam("dateSortie") Date dateSortie,
+                                    @RequestParam("budget") int budget,
+                                    @RequestParam("montantRecette") int montantRecette,
+                                    @RequestParam("noRea") int noRea,
+                                    @RequestParam("codeCat") String codeCat
+                                    ) {
+        String destinationPage = "";
+        System.out.println(" titre : " + titre+" duree : " + duree+" dateSortie : " + dateSortie+" budget : " + budget+" montantRecette : " + montantRecette+
+                " noRea : " + noRea+
+                " codeCat : " + codeCat);
+        try {
+           filmService.addFilm(titre,duree,dateSortie,budget,montantRecette,noRea,codeCat);
+        } catch (MonException e) {
+            ResponseEntity.notFound().build();
+        }catch (Exception e) {
+            ResponseEntity.notFound().build();
+        }
+
+    }
+
+    @PostMapping("/supprFilm")
+    public void supprUnPersonnage(@RequestParam("noFilm") int noFilm) {
+        String destinationPage = "";
+        System.out.println("noFilm="+noFilm);
+        try {
+            filmService.supprFilm(noFilm);
+        } catch (MonException e) {
+            ResponseEntity.notFound().build();
+        }catch (Exception e) {
+            ResponseEntity.notFound().build();
+        }
+    }
+
+
+    @PutMapping("/modifFilm")
+    public void updateFilm(
+                                    @RequestParam("noFilm") String noFilm,
+                                    @RequestParam("titre") String titre,
+                                    @RequestParam("duree") int duree,
+                                    @RequestParam("dateSortie") Date dateSortie,
+                                    @RequestParam("budget") int budget,
+                                    @RequestParam("montantRecette") int montantRecette,
+                                    @RequestParam("noRea") int noRea,
+                                    @RequestParam("codeCat") String codeCat)
+    {
+        try {
+            filmService.updateFilm(noFilm, titre, duree, dateSortie, budget,  montantRecette, noRea, codeCat);
+        }
+        catch (MonException e) {
+
+            ResponseEntity.notFound().build();
+        }
+        catch (Exception e) {
+
+            ResponseEntity.notFound().build();
+        }
+
     }
 }

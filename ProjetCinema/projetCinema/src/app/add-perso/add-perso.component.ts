@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ActeurService } from '../services/acteur.service';
 import { FilmService } from '../services/film.service';
 import { PersonnageService } from '../services/personnage.service';
@@ -12,19 +12,16 @@ import { PersonnageService } from '../services/personnage.service';
 })
 export class AddPersoComponent implements OnInit {
 
-  constructor(private acteurService:ActeurService, private personnageService: PersonnageService, private filmService: FilmService, private router: Router) { }
-  acteurInfo = {noAct:1,nomAct:"bla"}
-  defaultFilm= {noFilm:1,titre:'Léon'}
-  titre
+  constructor(private acteurService:ActeurService, private personnageService: PersonnageService, private filmService: FilmService, private router: Router, private route: ActivatedRoute) { }
+  acteurInfo
   films
-  acteurs
   ngOnInit(): void {
     this.films =this.filmService.getFilmList()
-    this.acteurs = this.acteurService.getActeurList()
-
+    const noAct = this.route.snapshot.params['id'];
+    this.acteurInfo = this.acteurService.getActeurById(+noAct)
   }
   onSubmit(form: NgForm) {
-    this.personnageService.updatePerso(form.value)
+    this.personnageService.addPerso(form.value)
     this.router.navigate(["/acteurs/"+this.acteurInfo.noAct]);
   }
 }

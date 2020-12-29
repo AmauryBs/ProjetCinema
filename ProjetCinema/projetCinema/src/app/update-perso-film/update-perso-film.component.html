@@ -9,7 +9,7 @@
                     <label class="col-md-3 col-sm-3 control-label">Titre : </label>
                     <div class="col-md-2 col-sm-2">
                         <select id="film" class="form-control" name="film" [(ngModel)]="perso.noFilm" required autofocus>
-                            <option *ngFor="let film of films" [label]="film.titre" [ngValue]="film.noFilm"></option>
+                            <option  [label]="perso.titre" [ngValue]="perso.noFilm"></option>
                         </select>
                     </div>
                 </div>

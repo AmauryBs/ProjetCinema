@@ -9,7 +9,7 @@
 <br>
 <br>
 <h4>Personnages du Film: </h4>
-<button mat-button mat-flat-button color="primary" routerLink="/addPersoFilm/{{film.noFilm}}">Add Row</button>
+<button mat-button mat-flat-button color="primary" routerLink="/addPersoFilm/{{film.noFilm}}">Ajouter</button>
 <table class="table" #mytable>
     <thead class="thead-dark">
     <tr>
@@ -23,7 +23,7 @@
             <td>{{ perso.nomAct }}</td>
             <td>{{ perso.nomPerso }}</td>
             <td>
-                <a [routerLink]="['/updatePersoFilm', perso.noFilm, perso.noAct, perso.nomPerso]"  class="btn btn-default btn-sm">Edit</a>
+                <a [routerLink]="['/updatePersoFilm', perso.noFilm, perso.noAct,perso.nomPerso]"  class="btn btn-default btn-sm">Edit</a>
                 <a routerLink="./" (click) ="remove(perso)" class="btn btn-danger btn-sm">Delete</a>
             </td>
         </tr>

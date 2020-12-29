@@ -18,7 +18,6 @@ export class PersonnageService {
         // look for the entry with a matching  value
         if (this.persos[i] == perso ){
           this.persos.splice(i, 1);
-          console.log(this.persos[i])
           break;
         }
       }
@@ -26,16 +25,15 @@ export class PersonnageService {
     }
   
   updatePerso(newPerso){
-    console.log(newPerso)
     for (var i = 0; i < this.persos.length; i++){
       // look for the entry with a matching  value
       if (this.persos[i] == newPerso.oldPerso ){
         this.persos[i].noFilm = newPerso.film.noFilm
         this.persos[i].nomPerso = newPerso.nomPerso
         break;
-      }
-      
+      } 
     }
-    console.log(this.persos)
   }
+
+  addPerso(newPerso){}
 }

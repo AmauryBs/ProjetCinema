@@ -21,7 +21,7 @@
                 <label class="col-md-3 col-sm-3 control-label">Acteur : </label>
                 <div class="col-md-2 col-sm-2">
                     <select id="noAct" class="form-control" name="noAct" [(ngModel)]="perso.noAct" required autofocus>
-                        <option *ngFor="let acteur of acteurs" [label]="acteur.nomAct" [ngValue]="acteur.noAct"></option>
+                        <option [label]="perso.prenAct+ ' ' + perso.nomAct" [ngValue]="perso.noAct"></option>
                     </select>
                 </div>
             </div>

@@ -24,6 +24,7 @@ import { AddPersoComponent } from './add-perso/add-perso.component';
 import { AddPersoFilmComponent } from './add-perso-film/add-perso-film.component';
 import { UpdatePersoFilmComponent } from './update-perso-film/update-perso-film.component';
 import { PersonnageService } from './services/personnage.service';
+import { SearchFilmComponent } from './search-film/search-film.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { PersonnageService } from './services/personnage.service';
     AddPersoComponent,
     AddPersoFilmComponent,
     UpdatePersoFilmComponent,
+    SearchFilmComponent,
   ],
   imports: [
     BrowserModule,

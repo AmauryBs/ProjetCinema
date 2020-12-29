@@ -25,6 +25,7 @@ import { AddPersoFilmComponent } from './add-perso-film/add-perso-film.component
 import { UpdatePersoFilmComponent } from './update-perso-film/update-perso-film.component';
 import { PersonnageService } from './services/personnage.service';
 import { SearchFilmComponent } from './search-film/search-film.component';
+import {  HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { SearchFilmComponent } from './search-film/search-film.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule
   ],
   providers: [AuthService, AuthGuard,FilmService,ActeurService, PersonnageService],
   bootstrap: [AppComponent]

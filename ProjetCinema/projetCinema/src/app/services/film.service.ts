@@ -1,25 +1,13 @@
 import { Film } from '../models/film.model';
 import { Subject } from 'rxjs/';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class FilmService {
-  private films: Film[] = [
-    new Film(1,"Léon",110, new Date("1994-04-14"), 17531000,69250000,{NoRea:3,NomRea:"Besson",PrenRea:"Luc"},{CodeCat:"PO",LibelleCat:"Policier",image:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Police-IMG_4105.jpg/300px-Police-IMG_4105.jpg"}),
-    new Film(2,"Léon2",110, new Date("1994-04-14"), 17531000,69250000,{NoRea:3,NomRea:"Besson",PrenRea:"Luc"},{CodeCat:"PO",LibelleCat:"Policier",image:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Police-IMG_4105.jpg/300px-Police-IMG_4105.jpg"}
-    )];  
+  private films: Film[];
 
 
-
-  getFilms(){
-    return this.films
-  }
-  getFilmById(id: number) {
-    const film = this.films.find(
-      (s) => {
-        return s.noFilm === id;
-      }
-    );
-    return film;
-}
   getFilmList(){
 
     return [{noFilm:1,titre:'Léon'},{noFilm:2,titre:'Léa'}]
@@ -29,4 +17,40 @@ export class FilmService {
     return this.films
   }
 
+  constructor(private httpClient: HttpClient) { }
+  filmSubject = new Subject<any[]>();
+
+  emitFilmSubject() {
+    this.filmSubject.next(this.films.slice());
+  }
+
+  getFilms() {
+    this.httpClient
+      .get<any[]>('http://localhost:8080/getFilms')
+      .subscribe(
+        (response) => {
+          this.films = response;
+          this.emitFilmSubject();
+        },
+        (error) => {
+          console.log('Erreur ! : ' + error);
+        }
+      );
+  }
+
+  getFilmById(id: number) {
+    const promise = new Promise((resolve, reject) => { 
+      this.httpClient.get<any[]>('http://localhost:8080/getFilm/'+id)
+    .toPromise()
+    .then((res: any) => {
+      const data = res
+      resolve(data);
+    },
+    err => {
+        reject(err)
+      }
+    );
+  });
+  return promise
+}
 }

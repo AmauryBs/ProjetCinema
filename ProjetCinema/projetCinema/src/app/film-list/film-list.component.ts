@@ -18,14 +18,22 @@ export class FilmListComponent implements OnInit {
   constructor(private filmService: FilmService, private router: Router) { }
 
   ngOnInit() {
-    this.films = this.filmService.getFilms();
+    this.filmSubscription = this.filmService.filmSubject.subscribe(
+      (films: any[]) => {
+        this.films = films;
+      }
+    );
+    this.filmService.getFilms()
+
   }
 
 
 
   onSubmit(form: NgForm) {
     this.router.navigate(["/films/search",form.value.value,form.value.option]);
-
 }
 
+  ngOnDestroy(){
+    this.filmSubscription.unsubscribe()
+  }
 }

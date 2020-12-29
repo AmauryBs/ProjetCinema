@@ -6,10 +6,10 @@ export class Film {
         public  dateSortie: Date,
         public  budget: number,
         public  montantRecette: number,
-        public realisateur:  {NoRea: number,
+        public rea:  {NoRea: number,
                             NomRea: string,
                             PrenRea: string},
-        public categorie: {CodeCat: string,
+        public cat: {CodeCat: string,
                             LibelleCat: string,
                             image:string},
     ) {}

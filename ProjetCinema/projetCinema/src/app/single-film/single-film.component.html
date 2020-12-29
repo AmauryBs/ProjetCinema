@@ -1,15 +1,15 @@
-<h3>{{ film.titre }}</h3>
+<h3>{{ (film | async).titre }}</h3>
 <p></p>
-<p>{{ film.realisateur.PrenRea }} {{ film.realisateur.NomRea | uppercase}} &nbsp;&nbsp;&nbsp;&nbsp; Durée: {{ film.duree }} min</p>
-<p>Date de sortie: {{ film.dateSortie | date:'d MMMM y' | date:'d MMMM y' }} </p>
-<p>Budget: {{film.budget}}€ &nbsp;&nbsp;&nbsp;&nbsp;</p>
-<p>Recette: {{film.montantRecette}} €</p>
-<p>Genre: {{film.categorie.LibelleCat}}</p>
-<img src="{{film.categorie.image}}">
+<p>{{ (film | async).rea.prenRea }} {{ (film | async).rea.nomRea | uppercase}} &nbsp;&nbsp;&nbsp; Durée: {{(film | async).duree }} min</p>
+<p>Date de sortie: {{ (film | async).dateSortie| async | date:'d MMMM y' | date:'d MMMM y' }} </p>
+<p>Budget: {{(film | async).budget}}€ &nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>Recette: {{(film | async).montantRecette}} €</p>
+<p>Genre: {{(film | async).cat.LibelleCat}}</p>
+<img src="{{(film | async).cat.image}}">
 <br>
 <br>
 <h4>Personnages du Film: </h4>
-<button mat-button mat-flat-button color="primary" routerLink="/addPersoFilm/{{film.noFilm}}">Ajouter</button>
+<button mat-button mat-flat-button color="primary" routerLink="/addPersoFilm/{{(film | async).noFilm}}">Ajouter</button>
 <table class="table" #mytable>
     <thead class="thead-dark">
     <tr>
@@ -20,7 +20,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let perso of persos">
-            <td>{{ perso.nomAct }}</td>
+            <td>{{ perso.nomAct|async }}</td>
             <td>{{ perso.nomPerso }}</td>
             <td>
                 <a [routerLink]="['/updatePersoFilm', perso.noFilm, perso.noAct,perso.nomPerso]"  class="btn btn-default btn-sm">Edit</a>

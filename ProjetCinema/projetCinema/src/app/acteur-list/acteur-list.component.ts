@@ -16,7 +16,12 @@ export class ActeurListComponent implements OnInit {
   constructor(private acteurService: ActeurService) { }
 
   ngOnInit() {
-    this.acteurs = this.acteurService.getActeurs();
+    this.acteurSubscription = this.acteurService.acteurSubject.subscribe(
+      (acteurs: any[]) => {
+        this.acteurs = acteurs;
+      }
+    );
+    this.acteurService.getActeurs()
   }
 
 

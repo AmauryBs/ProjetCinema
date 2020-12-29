@@ -19,17 +19,17 @@ export class UpdatePersoFilmComponent implements OnInit {
   constructor(private acteurService:ActeurService, private personnageService: PersonnageService, private filmService: FilmService, private router: Router,  private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.acteurs = this.acteurService.getActeurList()
-    const noFilm = +this.route.snapshot.params['noFilm'];
-    const noAct = +this.route.snapshot.params['noAct'];
-    const nomPerso = this.route.snapshot.params['nomPerso'];
-    this.perso["noFilm"] = noFilm
-    this.perso["noAct"] = noAct
-    this.perso["nomPerso"] = nomPerso
-    this.perso["titre"] = this.filmService.getFilmById(+noFilm).titre
-    this.perso["nomAct"] = this.acteurService.getActeurById(+noAct).nomAct
-    this.perso["prenAct"] = this.acteurService.getActeurById(+noAct).prenAct
-    this.oldPerso =this.perso
+    // this.acteurs = this.acteurService.getActeurList()
+    // const noFilm = +this.route.snapshot.params['noFilm'];
+    // const noAct = +this.route.snapshot.params['noAct'];
+    // const nomPerso = this.route.snapshot.params['nomPerso'];
+    // this.perso["noFilm"] = noFilm
+    // this.perso["noAct"] = noAct
+    // this.perso["nomPerso"] = nomPerso
+    // this.perso["titre"] = this.filmService.getFilmById(+noFilm).titre
+    // this.perso["nomAct"] = this.acteurService.getActeurById(+noAct).nomAct
+    // this.perso["prenAct"] = this.acteurService.getActeurById(+noAct).prenAct
+    // this.oldPerso =this.perso
   }
   onSubmit(form: NgForm) {
     this.personnageService.updatePerso(form.value)

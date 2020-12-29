@@ -19,8 +19,8 @@
                 <div class="form-group">
                     <label class="col-md-3 col-sm-3 control-label">Acteur : </label>
                     <div class="col-md-2 col-sm-2">
-                        <select id="noAct" class="form-control" name="noAct"  [(ngModel)]="acteurInfo.noAct"required autofocus>
-                            <option [label]="acteurInfo.nomAct" [ngValue]="acteurInfo.noAct"></option>
+                        <select id="noAct" class="form-control" name="noAct"  [(ngModel)]="acteurInfo.noAct"required autofocus >
+                            <option [label]="acteurInfo.prenAct+ ' ' + acteurInfo.nomAct" [ngValue]="acteurInfo.noAct"></option>
                         </select>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                 <div class="form-group">
                     <label class="col-md-3 col-sm-3 control-label">Nom du personnage : </label>
                     <div class="col-md-2 col-sm-2">
-                        <input type="text" name="nomPerso"   class="form-control"  required autofocus>
+                        <input type="text" name="nomPerso"   class="form-control"  required autofocus ngModel>
                     </div>
                 </div>
             </div>

@@ -11,11 +11,13 @@ import { ModifPersoComponent } from './modif-perso/modif-perso.component';
 import { AddPersoComponent } from './add-perso/add-perso.component';
 import { AddPersoFilmComponent } from './add-perso-film/add-perso-film.component';
 import { UpdatePersoFilmComponent } from './update-perso-film/update-perso-film.component';
+import { SearchFilmComponent } from './search-film/search-film.component';
 
 
 const appRoutes: Routes = [
   { path: 'auth', component: AuthComponent },
   { path: 'films', canActivate: [AuthGuard],component: FilmListComponent },
+  { path: 'films/search/:value/:option', canActivate: [AuthGuard],component: SearchFilmComponent },
   { path: 'films/:id', canActivate: [AuthGuard],component: SingleFilmComponent },
   { path: 'acteurs', canActivate: [AuthGuard],component: ActeurListComponent },
   { path: 'acteurs/:id', canActivate: [AuthGuard],component:SingleActeurComponent },

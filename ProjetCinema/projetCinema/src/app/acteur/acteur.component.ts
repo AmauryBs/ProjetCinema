@@ -15,7 +15,7 @@ export class ActeurComponent implements OnInit {
 
   @Input() id: number;
   
-  constructor(private acteurService: ActeurService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

@@ -9,6 +9,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
+          <factory-entry name="ProjetCinemaAPI" />
           <factory-entry name="entityManagerFactory" value="2fa5e980-9f0c-484e-a57a-d720846036fb" />
         </datasource-mapping>
         <naming-strategy-map />

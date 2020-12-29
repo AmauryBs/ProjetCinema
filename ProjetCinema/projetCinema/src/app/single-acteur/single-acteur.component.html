@@ -5,7 +5,7 @@
      <p [hidden]="acteur.dateDeces == null">Date deces: {{ acteur.dateDeces | date:'d MMMM y' }} </p>
      <br>
     <h4>Personnages joués: </h4>
-    <button mat-button mat-flat-button color="primary" routerLink="/addPerso/{{acteur.noAct}}">Add Row</button>
+    <button mat-button mat-flat-button color="primary" routerLink="/addPerso/{{acteur.noAct}}">Ajouter</button>
     <table class="table" #mytable>
         <thead class="thead-dark">
         <tr>

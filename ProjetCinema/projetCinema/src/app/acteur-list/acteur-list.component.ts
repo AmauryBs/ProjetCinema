@@ -8,7 +8,7 @@ import { ActeurService } from '../services/acteur.service';
   templateUrl: './acteur-list.component.html',
   styleUrls: ['./acteur-list.component.scss']
 })
-export class ActeurListComponent implements OnInit, OnDestroy {
+export class ActeurListComponent implements OnInit {
 
   acteurs: Acteur[];
   acteurSubscription: Subscription;
@@ -16,20 +16,9 @@ export class ActeurListComponent implements OnInit, OnDestroy {
   constructor(private acteurService: ActeurService) { }
 
   ngOnInit() {
-    this.acteurSubscription = this.acteurService.acteurSubject.subscribe(
-      (acteurs: Acteur[]) => {
-        this.acteurs = acteurs;
-      }
-    );
-    this.acteurService.emitActeur();
+    this.acteurs = this.acteurService.getActeurs();
   }
 
-
-
-
-  ngOnDestroy() {
-    this.acteurSubscription.unsubscribe();
-  }
 
 
 }

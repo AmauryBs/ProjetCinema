@@ -7,18 +7,12 @@ export class ActeurService {
     new Acteur(1,"Reno","Jean", new Date("1948-07-30"),null),
     new Acteur(2,"Bourvil","André",new Date("1917-07-27"),new Date("1970-09-23")
     )
-];  acteurSubject = new Subject<Acteur[]>();
+  ];  acteurSubject = new Subject<Acteur[]>();
 
 
-  emitActeur() {
-    this.acteurSubject.next(this.acteurs.slice());
+  getActeurs(){
+    return this.acteurs
   }
-
-  addActeur(acteur: Acteur) {
-    this.acteurs.push(acteur);
-    this.emitActeur();
-  }
-  
   getActeurById(id: number) {
     const acteur = this.acteurs.find(
       (s) => {

@@ -8,6 +8,9 @@ import { SingleFilmComponent } from './single-film/single-film.component';
 import { ActeurListComponent } from './acteur-list/acteur-list.component';
 import { SingleActeurComponent } from './single-acteur/single-acteur.component';
 import { ModifPersoComponent } from './modif-perso/modif-perso.component';
+import { AddPersoComponent } from './add-perso/add-perso.component';
+import { AddPersoFilmComponent } from './add-perso-film/add-perso-film.component';
+import { UpdatePersoFilmComponent } from './update-perso-film/update-perso-film.component';
 
 
 const appRoutes: Routes = [
@@ -16,7 +19,10 @@ const appRoutes: Routes = [
   { path: 'films/:id', canActivate: [AuthGuard],component: SingleFilmComponent },
   { path: 'acteurs', canActivate: [AuthGuard],component: ActeurListComponent },
   { path: 'acteurs/:id', canActivate: [AuthGuard],component:SingleActeurComponent },
-  { path: 'updatePerso/:id', canActivate: [AuthGuard],component:ModifPersoComponent },
+  { path: 'updatePerso/:noFilm/:noAct/:nomPerso', canActivate: [AuthGuard],component:ModifPersoComponent },
+  { path: 'updatePersoFilm/:noFilm/:noAct/:nomPerso', canActivate: [AuthGuard],component:UpdatePersoFilmComponent },
+  { path: 'addPerso/:id', canActivate: [AuthGuard],component:AddPersoComponent },
+  { path: 'addPersoFilm/:id', canActivate: [AuthGuard],component:AddPersoFilmComponent },  
   { path: '', canActivate: [AuthGuard],component:  FilmListComponent},
   { path: 'not-found', component: FourOhFourComponent },
   { path: '**', redirectTo: 'not-found' },

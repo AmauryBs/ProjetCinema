@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Acteur } from '../models/acteur.model';
 import { ActeurService } from '../services/acteur.service';
 import {Router} from '@angular/router';
+import { PersonnageService } from '../services/personnage.service';
+import { FilmService } from '../services/film.service';
 
 
 @Component({
@@ -15,27 +17,27 @@ import {Router} from '@angular/router';
 export class SingleActeurComponent implements OnInit {
 
   acteur: Acteur;
-  films
-  displayedColumns: string[] = ['titre', 'perso', 'action'];
+  persos
 
-  constructor(private acteurService: ActeurService, private route: ActivatedRoute, private routeur : Router) { }
+  constructor(private acteurService: ActeurService, private filmService: FilmService, private personnageService: PersonnageService, private route: ActivatedRoute, private routeur : Router) { }
 
   ngOnInit() {
     const id = this.route.snapshot.params['id'];
     this.acteur = this.acteurService.getActeurById(+id);
-    this.films = this.acteurService.getPersoByActeur(+id)
+    this.persos = this.personnageService.getPersoByActeur(+id)
+    for(var perso of this.persos){
+      perso["titre"] =this.filmService.getFilmById( perso.noFilm).titre
+    }
   }
 
-  remove(film){
-    this.acteurService.removePerso(film)
+  remove(perso){
+    this.personnageService.removePerso(perso)
   }
 
-  add(){
-    //this.acteurService.add()
-  }
+ 
 
-  update(film){
-    this.routeur.navigate(['/updatePerso/'+ film.noFilm+ '.' + film.noAct + '.' + film.nomPerso]);
+  update(perso){
+    this.routeur.navigate(['/updatePerso', { noFilm: perso.noFilm, noAct: perso.noAct,nomPerso: perso.nomPerso} ]);
   }
 
 }

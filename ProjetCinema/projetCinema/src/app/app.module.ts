@@ -20,6 +20,10 @@ import { ActeurComponent } from './acteur/acteur.component';
 import { ActeurListComponent } from './acteur-list/acteur-list.component';
 import { SingleActeurComponent } from './single-acteur/single-acteur.component';
 import { ModifPersoComponent } from './modif-perso/modif-perso.component';
+import { AddPersoComponent } from './add-perso/add-perso.component';
+import { AddPersoFilmComponent } from './add-perso-film/add-perso-film.component';
+import { UpdatePersoFilmComponent } from './update-perso-film/update-perso-film.component';
+import { PersonnageService } from './services/personnage.service';
 
 @NgModule({
   declarations: [
@@ -33,13 +37,16 @@ import { ModifPersoComponent } from './modif-perso/modif-perso.component';
     SingleActeurComponent,
     SingleFilmComponent,
     ModifPersoComponent,
+    AddPersoComponent,
+    AddPersoFilmComponent,
+    UpdatePersoFilmComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
   ],
-  providers: [AuthService, AuthGuard,FilmService,ActeurService],
+  providers: [AuthService, AuthGuard,FilmService,ActeurService, PersonnageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

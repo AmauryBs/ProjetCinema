@@ -1,5 +1,5 @@
 <BR> <BR> <BR>
-<h1>{{ titre }}</h1>
+<h1>Modification d'un personnage</h1>
     <BR> <BR>
           
 <form (ngSubmit)="onSubmit(f)" #f="ngForm">
@@ -21,7 +21,7 @@
                 <label class="col-md-3 col-sm-3 control-label">Acteur : </label>
                 <div class="col-md-2 col-sm-2">
                     <select id="noAct" class="form-control" name="noAct" [(ngModel)]="perso.noAct" required autofocus>
-                        <option *ngFor="let acteur of acteurs" [label]="acteur.nom" [ngValue]="acteur.noAct"></option>
+                        <option *ngFor="let acteur of acteurs" [label]="acteur.nomAct" [ngValue]="acteur.noAct"></option>
                     </select>
                 </div>
             </div>
@@ -41,10 +41,10 @@
                 <button type="submit" class="btn btn-default btn-primary">
                     <span class="glyphicon glyphicon-ok"></span> Valider
                 </button>
+                &nbsp;  &nbsp;  &nbsp;  &nbsp;
                 <button class="btn btn-default btn-primary"  mat-button mat-flat-button color="primary" routerLink="/acteurs/{{perso.noAct}}">
                     <span class="glyphicon glyphicon-remove" >
                     </span>Annuler</button>
-                    &nbsp;  &nbsp;  &nbsp;  &nbsp;
             </div>           
         </div>
     </div>

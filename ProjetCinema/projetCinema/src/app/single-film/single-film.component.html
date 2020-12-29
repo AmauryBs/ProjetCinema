@@ -7,4 +7,26 @@
 <p>Genre: {{film.categorie.LibelleCat}}</p>
 <img src="{{film.categorie.image}}">
 <br>
+<br>
+<h4>Personnages du Film: </h4>
+<button mat-button mat-flat-button color="primary" routerLink="/addPersoFilm/{{film.noFilm}}">Add Row</button>
+<table class="table" #mytable>
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Acteur</th>
+        <th scope="col">Personnage</th>
+        <th scope="col">Options</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let perso of persos">
+            <td>{{ perso.nomAct }}</td>
+            <td>{{ perso.nomPerso }}</td>
+            <td>
+                <a [routerLink]="['/updatePersoFilm', perso.noFilm, perso.noAct, perso.nomPerso]"  class="btn btn-default btn-sm">Edit</a>
+                <a routerLink="./" (click) ="remove(perso)" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
 <a routerLink="/films">Retour à la liste</a>

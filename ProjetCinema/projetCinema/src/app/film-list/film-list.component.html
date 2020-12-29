@@ -18,10 +18,10 @@
 <ul class="list-group">
     <app-film  *ngFor="let film of films"
                     [titre]="film.titre"
-                    [realisateur]="film.rea.PrenRea + ' ' + film.rea.NomRea| uppercase"
+                    [realisateur]="film.rea.prenRea + ' ' + film.rea.nomRea| uppercase"
                     [dateSortie]="film.dateSortie"
                     [duree]="film.duree"
-                    [genre]="film.cat.LibelleCat"
+                    [genre]="film.cat.libelleCat"
                     [id]="film.noFilm">
     </app-film>
 </ul>

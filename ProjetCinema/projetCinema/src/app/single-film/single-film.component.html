@@ -1,10 +1,10 @@
 <h3>{{ (film | async).titre }}</h3>
 <p></p>
 <p>{{ (film | async).rea.prenRea }} {{ (film | async).rea.nomRea | uppercase}} &nbsp;&nbsp;&nbsp; Durée: {{(film | async).duree }} min</p>
-<p>Date de sortie: {{ (film | async).dateSortie| async | date:'d MMMM y' | date:'d MMMM y' }} </p>
+<p>Date de sortie: {{ (film | async).dateSortie| date:'d MMMM y' | date:'d MMMM y' }} </p>
 <p>Budget: {{(film | async).budget}}€ &nbsp;&nbsp;&nbsp;&nbsp;</p>
 <p>Recette: {{(film | async).montantRecette}} €</p>
-<p>Genre: {{(film | async).cat.LibelleCat}}</p>
+<p>Genre: {{ (film | async).cat.libelleCat}}</p>
 <img src="{{(film | async).cat.image}}">
 <br>
 <br>

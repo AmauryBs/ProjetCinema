@@ -46,16 +46,16 @@ public interface PersonnageRepository extends JpaRepository<Personnage, Long> {
 
 
 
-    @Query("Select P.act.NoAct,P.film.NoFilm,P.NomPers " +
+    @Query(value="Select P.NoAct,P.NoFilm,P.NomPers " +
             " from Personnage P" +
-            " where P.film.NoFilm=:noFilm"
+            " where P.NoFilm=:noFilm",nativeQuery = true
     )
     List<Personnage> getAllPersonnagesOfFilm(int noFilm);
 
 
-    @Query("Select P.act.NoAct,P.film.NoFilm,P.NomPers " +
+    @Query(value ="Select P.NoAct,P.NoFilm,P.NomPers " +
             " from Personnage P" +
-            " where P.act.NoAct=:noAct"
+            " where P.NoAct=:noAct",nativeQuery = true
     )
     List<Personnage> getAllPersonnagesOfActeur(int noAct);
 }

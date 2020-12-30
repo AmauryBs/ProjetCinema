@@ -1,11 +1,11 @@
 <ul class="list-group-item">
-    <h3>{{ acteur.nomAct }}  {{ acteur.prenAct }}</h3>
+    <h3>{{ (acteurInfo|async).nomAct }}  {{ (acteurInfo|async).prenAct }}</h3>
     <p></p>
-     <p>Date de naissance: {{ acteur.dateNaiss | date:'d MMMM y' }} </p>
-     <p [hidden]="acteur.dateDeces == null">Date deces: {{ acteur.dateDeces | date:'d MMMM y' }} </p>
+     <p>Date de naissance: {{ (acteurInfo|async).dateNaiss | date:'d MMMM y' }} </p>
+     <p [hidden]="(acteurInfo|async).dateDeces == null">Date deces: {{ (acteurInfo|async).dateDeces | date:'d MMMM y' }} </p>
      <br>
     <h4>Personnages joués: </h4>
-    <button mat-button mat-flat-button color="primary" routerLink="/addPerso/{{acteur.noAct}}">Ajouter</button>
+    <button mat-button mat-flat-button color="primary" routerLink="/addPerso/{{(acteurInfo|async).noAct}}">Ajouter</button>
     <table class="table" #mytable>
         <thead class="thead-dark">
         <tr>
@@ -15,11 +15,11 @@
         </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let perso of persos">
-                <td>{{ perso.titre }}</td>
-                <td>{{ perso.nomPerso }}</td>
+            <tr *ngFor="let perso of persos | async">
+                <td>{{ perso.noFilm.titre }}</td>
+                <td>{{ perso.nomPers }}</td>
                 <td>
-                    <a [routerLink]="['/updatePerso', perso.noFilm, perso.noAct, perso.nomPerso]"  class="btn btn-default btn-sm">Edit</a>
+                    <a [routerLink]="['/updatePerso', perso.noFilm.noFilm, perso.noAct.noAct, perso.nomPers]"  class="btn btn-default btn-sm">Edit</a>
                     <a routerLink="./" (click) ="remove(perso)" class="btn btn-danger btn-sm">Delete</a>
                 </td>
             </tr>

@@ -8,20 +8,20 @@
             <div class="form-group">
                 <label class="col-md-3 col-sm-3 control-label">Titre : </label>
                 <div class="col-md-2 col-sm-2">
-                    <select id="film" class="form-control" name="film" [(ngModel)]="perso.noFilm" required autofocus>
+                    <select id="noFilm" class="form-control" name="noFilm" required autofocus [ngModel]="(perso|async).noFilm" >
                         <option *ngFor="let film of films" [label]="film.titre" [ngValue]="film.noFilm"></option>
                     </select>
                 </div>
             </div>
         </div>
-        <input type="hidden" id="oldPerso" name="oldPerso" [(ngModel)]="oldPerso" />
+        <input type="hidden" id="oldPerso" name="oldPerso" [ngModel]="(perso|async)" />
 
         <div class="form-horizontal">  
             <div class="form-group">
                 <label class="col-md-3 col-sm-3 control-label">Acteur : </label>
                 <div class="col-md-2 col-sm-2">
-                    <select id="noAct" class="form-control" name="noAct" [(ngModel)]="perso.noAct" required autofocus>
-                        <option [label]="perso.prenAct+ ' ' + perso.nomAct" [ngValue]="perso.noAct"></option>
+                    <select id="noAct" class="form-control" name="noAct"  [ngModel]="(perso|async).noAct"required autofocus >
+                        <option [label]="(perso|async).prenAct+ ' ' + (perso|async).nomAct" [ngValue]="(perso|async).noAct"></option>
                     </select>
                 </div>
             </div>
@@ -31,7 +31,7 @@
             <div class="form-group">
                 <label class="col-md-3 col-sm-3 control-label">Nom du personnage : </label>
                 <div class="col-md-2 col-sm-2">
-                    <input type="text" name="nomPerso" [(ngModel)]="perso.nomPerso"  class="form-control"  required autofocus>
+                    <input type="text" name="nomPerso"   class="form-control"  required autofocus [ngModel]="(perso|async).nomPerso">
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
                     <span class="glyphicon glyphicon-ok"></span> Valider
                 </button>
                 &nbsp;  &nbsp;  &nbsp;  &nbsp;
-                <button class="btn btn-default btn-primary"  mat-button mat-flat-button color="primary" routerLink="/acteurs/{{perso.noAct}}">
+                <button class="btn btn-default btn-primary"  mat-button mat-flat-button color="primary" routerLink="/acteurs/{{(perso|async).noAct}}">
                     <span class="glyphicon glyphicon-remove" >
                     </span>Annuler</button>
             </div>           

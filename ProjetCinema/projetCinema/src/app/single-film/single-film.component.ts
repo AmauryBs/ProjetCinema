@@ -1,6 +1,7 @@
+import { ArrayType } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
 import { Acteur } from '../models/acteur.model';
 import { Film } from '../models/film.model';
 import { Personnage } from '../models/personnage.model';
@@ -14,28 +15,34 @@ import { PersonnageService } from '../services/personnage.service';
   styleUrls: ['./single-film.component.scss']
 })
 export class SingleFilmComponent implements OnInit {
-
-  film
+  filmInfo:Observable<Film>;
   displayedColumns: string[] = ['titre', 'perso', 'action'];
-  acteur
-  persos
+  persos: Observable<any[]>
+  id
+
   constructor(private filmService: FilmService, private personnageService: PersonnageService,
-    private route: ActivatedRoute, private acteurService: ActeurService) { }
+    private route: ActivatedRoute, private acteurService: ActeurService,private router: Router,) { }
 
   ngOnInit() {
-    const id = this.route.snapshot.params['id'];
-    this.film = this.filmService.getFilmById(+id).then( (res:Film) =>{
-      res.dateSortie = new Date(res.dateSortie)
-      return res})
-    this.persos = this.personnageService.getPersoByFilm(+id).then( (res:Personnage) =>{
-      return res})
-    for(var perso of this.persos){
-      const res = this.acteurService.getActeurById(perso.noAct).then((res:Acteur)=>{return res.prenAct + " " + res.nomAct;})
-      perso["nomAct"] = res
-    }
+    this.id = this.route.snapshot.params['id'];
+
+    this.personnageService.getPersoByFilm(+this.id).then( (res:any) =>{
+      this.persos=of(res)       
+    })
+
+    this.filmService.getFilmById(+this.id).then( (res:Film) =>{
+      this.filmInfo=of(res)       
+    })
   }
 
   remove(perso){
-    this.personnageService.removePerso(perso)
+    this.personnageService.removePerso(perso).subscribe(res =>{console.log(res)
+      this.personnageService.getPersoByFilm(+this.id).then((res:any)=>{
+        this.persos=of(res)
+        this.router.navigate(["/films/"+res[0].noFilm.noFilm]);
+      })
+    })
+
+
   }
 }

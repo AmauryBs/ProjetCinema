@@ -44,8 +44,6 @@ public class PersonnageService {
     public void updatePersonnage(int noFilmOld, int noActOld, int noFilm, int noAct, String nomPers) {
         this.persRepo.supprPers(noFilmOld, noActOld);
         this.persRepo.addPersWithParams(noFilm, noAct,nomPers);
-
-
     }
 
     public Personnage getPersonnageFromIds(int noFilm, int noAct) {

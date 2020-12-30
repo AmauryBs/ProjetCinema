@@ -5,6 +5,7 @@ import { ActeurService } from '../services/acteur.service';
 import {Router} from '@angular/router';
 import { PersonnageService } from '../services/personnage.service';
 import { FilmService } from '../services/film.service';
+import { Observable, of } from "rxjs";
 
 
 @Component({
@@ -17,21 +18,27 @@ import { FilmService } from '../services/film.service';
 export class SingleActeurComponent implements OnInit {
 
   acteur: Acteur;
-  persos
-
+  acteurInfo:Observable<Acteur>
+  persos: Observable<any[]>
+  id
   constructor(private acteurService: ActeurService, private filmService: FilmService, private personnageService: PersonnageService, private route: ActivatedRoute, private routeur : Router) { }
 
   ngOnInit() {
-    // const id = this.route.snapshot.params['id'];
-    // this.acteur = this.acteurService.getActeurById(+id);
-    // this.persos = this.personnageService.getPersoByActeur(+id)
-    // for(var perso of this.persos){
-    //   perso["titre"] =this.filmService.getFilmById( perso.noFilm).titre
-    // }
+    this.id = this.route.snapshot.params['id'];
+    this.personnageService.getPersoByActeur(+this.id).then((res:any)=>{
+      this.persos=of(res) 
+      console.log(res)
+    })
+    this.acteurService.getActeurById(+this.id).then( (res:Acteur) =>{
+      this.acteurInfo=of(res)       
+    })
   }
 
   remove(perso){
-    this.personnageService.removePerso(perso)
+    this.personnageService.removePerso(perso).subscribe(res =>{console.log(res)})
+    this.personnageService.getPersoByActeur(+this.id).then((res:any)=>{
+      this.persos=of(res) 
+    })
   }
 
  

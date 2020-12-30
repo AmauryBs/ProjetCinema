@@ -4,5 +4,5 @@
     <p>Réalisateur: {{realisateur}} &nbsp;&nbsp;&nbsp;&nbsp; Durée: {{ duree }} min</p>
     <p>Date de sortie: {{ dateSortie | date:'d MMMM y' }} </p>
     <p>Genre: {{genre}}</p>
-    <a [routerLink]="[id]">Détail</a>
+    <a [routerLink]="['/films/',id]">Détail</a>
 </li>

@@ -8,8 +8,8 @@
                 <div class="form-group">
                     <label class="col-md-3 col-sm-3 control-label">Titre : </label>
                     <div class="col-md-2 col-sm-2">
-                        <select id="film" class="form-control" name="film" [(ngModel)]="filmInfo.noFilm" required autofocus>
-                            <option [label]="filmInfo.titre" [ngValue]="filmInfo.noFilm"></option>
+                        <select id="noFilm" class="form-control" name="noFilm" [ngModel]="(filmInfo| async).noFilm" required autofocus>
+                            <option [label]="(filmInfo| async).titre" [ngValue]="(filmInfo| async).noFilm"></option>
                         </select>
                     </div>
                 </div>
@@ -19,8 +19,8 @@
                 <div class="form-group">
                     <label class="col-md-3 col-sm-3 control-label">Acteur : </label>
                     <div class="col-md-2 col-sm-2">
-                        <select id="noAct" class="form-control" name="noAct"  [(ngModel)]="acteurs[0].noAct"required autofocus>
-                            <option *ngFor="let acteur of acteurs" [label]="acteur.nomAct" [ngValue]="acteur.noAct"></option>
+                        <select id="noAct" class="form-control" name="noAct"  [ngModel]="acteurs[0].noAct"required autofocus>
+                            <option *ngFor="let acteur of acteurs" [label]="acteur.prenAct+ ' ' + acteur.nomAct" [ngValue]="acteur.noAct"></option>
                         </select>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                         <span class="glyphicon glyphicon-ok"></span> Valider
                     </button>
                     &nbsp;  &nbsp;  &nbsp;  &nbsp;
-                    <button class="btn btn-default btn-primary"  mat-button mat-flat-button color="primary" routerLink="/films/{{ filmInfo.noFilm }}">
+                    <button class="btn btn-default btn-primary"  mat-button mat-flat-button color="primary" routerLink="/films/{{ (filmInfo| async).noFilm }}">
                         <span class="glyphicon glyphicon-remove" >
                         </span>Annuler</button>
                 </div>           

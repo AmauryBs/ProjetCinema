@@ -1,27 +1,27 @@
 <h2>Liste des Films</h2>
 <!-- Search form -->
-<form class="form-inline d-flex justify-content-center md-form form-sm active-cyan-2 mt-2" (ngSubmit)="onSubmit(f)" #f="ngForm">
+<form class="form-inline d-flex justify-content-center md-form form-sm active-cyan-2 mt-2"  #f="ngForm">
     <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
-      aria-label="Recherche"  name="value" ngModel required>
+      aria-label="Recherche"  name="value" [ngModel] ="value" required disabled>
     <i class="fas fa-search" aria-hidden="true"></i>
 
-    <select name="option" class="form-control form-control-sm" ngModel="titre">
+    <select name="option" class="form-control form-control-sm" [ngModel]="option" disabled>
         <option ngValue="titre">par Titre</option>
         <option ngValue="real">par Réalisateur</option>
         <option ngValue="act">par Acteur</option>
         <option ngValue="genre">par Genre</option>
     </select>
 
-    <button class="btn btn-primary" type="submit">Enregistrer</button>
+    <button class="btn btn-primary" routerLink="/films">retour</button>
 </form>
 
 <ul class="list-group">
-    <app-film  *ngFor="let film of films"
+    <app-film  *ngFor="let film of films | async"
                     [titre]="film.titre"
-                    [realisateur]="film.realisateur.PrenRea + ' ' + film.realisateur.NomRea| uppercase"
+                    [realisateur]="film.rea.prenRea + ' ' + film.rea.nomRea| uppercase"
                     [dateSortie]="film.dateSortie"
                     [duree]="film.duree"
-                    [genre]="film.categorie.LibelleCat"
+                    [genre]="film.cat.libelleCat"
                     [id]="film.noFilm">
     </app-film>
 </ul>

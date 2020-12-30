@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, Subscription,of } from 'rxjs';
+import { Acteur } from '../models/acteur.model';
 import { ActeurService } from '../services/acteur.service';
 import { FilmService } from '../services/film.service';
 import { PersonnageService } from '../services/personnage.service';
@@ -11,29 +13,44 @@ import { PersonnageService } from '../services/personnage.service';
   styleUrls: ['./update-perso-film.component.scss']
 })
 export class UpdatePersoFilmComponent implements OnInit {
-  perso={noFilm:0,noAct:0,nomPerso:"",titre:"",nomAct:"", prenAct:""}
-  oldPerso
-  titre
+  perso: Observable<any>;
+  acteurs:Acteur[]
+  acteurSubscription: Subscription;
+  noFilm;noAct;nomPerso;
 
-  acteurs
   constructor(private acteurService:ActeurService, private personnageService: PersonnageService, private filmService: FilmService, private router: Router,  private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    // this.acteurs = this.acteurService.getActeurList()
-    // const noFilm = +this.route.snapshot.params['noFilm'];
-    // const noAct = +this.route.snapshot.params['noAct'];
-    // const nomPerso = this.route.snapshot.params['nomPerso'];
-    // this.perso["noFilm"] = noFilm
-    // this.perso["noAct"] = noAct
-    // this.perso["nomPerso"] = nomPerso
-    // this.perso["titre"] = this.filmService.getFilmById(+noFilm).titre
-    // this.perso["nomAct"] = this.acteurService.getActeurById(+noAct).nomAct
-    // this.perso["prenAct"] = this.acteurService.getActeurById(+noAct).prenAct
-    // this.oldPerso =this.perso
+    this.acteurSubscription = this.acteurService.acteurSubject.subscribe(
+      (acteurs: Acteur[]) => {
+        this.acteurs = acteurs;
+      }
+    );
+    this.acteurService.getActeurs()
+
+    this.noFilm = +this.route.snapshot.params['noFilm'];
+    this.noAct = +this.route.snapshot.params['noAct'];
+    this.nomPerso = this.route.snapshot.params['nomPerso'];
+
+    this.perso["titre"] = this.personnageService.getPersoByids(+this.noFilm,this.noAct ).then(
+      (value:any)=>{
+        const tempperso={}
+        tempperso["noFilm"] = this.noFilm
+        tempperso["noAct"] = this.noAct
+        tempperso["nomPerso"] = this.nomPerso
+        tempperso["titre"] = value.noFilm.titre
+        tempperso["nomAct"] = value.noAct.nomAct
+        tempperso["prenAct"] = value.noAct.prenAct
+        console.log(tempperso)
+        this.perso = of(tempperso)
+      }
+    )
   }
   onSubmit(form: NgForm) {
-    this.personnageService.updatePerso(form.value)
-    this.router.navigate(["/films/"+this.perso.noFilm]);
+    console.log(form.value)
+    this.personnageService.updatePerso(form.value).subscribe(res =>{console.log(res)
+      this.router.navigate(["/films/"+form.value.noFilm]);
+    })
   }
 }
 

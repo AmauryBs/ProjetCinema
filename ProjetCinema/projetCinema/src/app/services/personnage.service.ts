@@ -1,16 +1,17 @@
 import { Personnage } from "../models/personnage.model"
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { throwError } from "rxjs";
+import { catchError } from "rxjs/operators";
 
 @Injectable()
 export class PersonnageService {
 
-  private persos =[new Personnage(1,1,'Jax'), new Personnage(2,2,'Ja')]
+  private persos =[];
 
   constructor(private httpClient: HttpClient) { }
   
   getPersoByFilm(id:number){
-      //return this.persos
       const promise = new Promise((resolve, reject) => { 
         this.httpClient.get<any[]>('http://localhost:8080/getPersonnages/film/'+id)
       .toPromise()
@@ -26,32 +27,76 @@ export class PersonnageService {
     return promise
   }
 
-  getPersoByActeur(id: number) {
 
-      return this.persos
+  getPersoByids(noFilm, noAct){
+    let body = new HttpParams();
+    body = body.set('noFilm', noFilm);
+    body = body.set('noAct',  noAct);
+    const promise = new Promise((resolve, reject) => { 
+      this.httpClient.post<any[]>('http://localhost:8080/getPersonnageFromIds',body)
+    .toPromise()
+    .then((res: any) => {
+      const data = res
+      resolve(data);
+    },
+    err => {
+        reject(err)
+      }
+    );
+  });
+  return promise
+}
+
+
+  getPersoByActeur(id: number) {
+      const promise = new Promise((resolve, reject) => { 
+        this.httpClient.get<any[]>('http://localhost:8080/getPersonnages/acteur/'+id)
+      .toPromise()
+      .then((res: any) => {
+        const data = res
+        resolve(data);
+      },
+      err => {
+          reject(err)
+        }
+      );
+    });
+    return promise
   }
 
   removePerso(perso){
-      for (var i = 0; i < this.persos.length; i++){
-        // look for the entry with a matching  value
-        if (this.persos[i] == perso ){
-          this.persos.splice(i, 1);
-          break;
-        }
-      }
-      return this.persos
-    }
+    let body = new HttpParams();
+    body = body.set('noFilm', perso.noFilm.noFilm);
+    body = body.set('noAct',  perso.noAct.noAct);
+    return this.httpClient
+      .post('http://localhost:8080/supprPersonnage', body)
+      .pipe(
+        );
+  }
   
-  updatePerso(newPerso){
-    for (var i = 0; i < this.persos.length; i++){
-      // look for the entry with a matching  value
-      if (this.persos[i] == newPerso.oldPerso ){
-        this.persos[i].noFilm = newPerso.film.noFilm
-        this.persos[i].nomPerso = newPerso.nomPerso
-        break;
-      } 
-    }
+  updatePerso(persolist){
+    let body = new HttpParams();
+    console.log(persolist)
+    body = body.set('noFilmOld', persolist.oldPerso.noFilm);
+    body = body.set('noActOld', persolist.oldPerso.noAct);
+    body = body.set('noFilm', persolist.noFilm);
+    body = body.set('noAct',  persolist.noAct);
+    body = body.set('nomPers', persolist.nomPerso);
+    return this.httpClient
+      .put('http://localhost:8080/modifPersonnage', body)
+      .pipe(
+      );
   }
 
-  addPerso(newPerso){}
+  addPerso(newPerso){
+    let body = new HttpParams();
+    body = body.set('noFilm', newPerso.noFilm);
+    body = body.set('noAct',  newPerso.noAct);
+    body = body.set('nomPers', newPerso.nomPerso);
+    return this.httpClient
+      .post('http://localhost:8080/ajoutPersonnage', body)
+      .pipe(
+      );
+
+  }
 }

@@ -19,7 +19,7 @@ export class FilmListComponent implements OnInit {
 
   ngOnInit() {
     this.filmSubscription = this.filmService.filmSubject.subscribe(
-      (films: any[]) => {
+      (films: Film[]) => {
         this.films = films;
       }
     );

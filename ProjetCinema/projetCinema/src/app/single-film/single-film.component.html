@@ -1,15 +1,15 @@
-<h3>{{ (film | async).titre }}</h3>
+<h3>{{ (filmInfo | async).noFilm.titre }}</h3>
 <p></p>
-<p>{{ (film | async).rea.prenRea }} {{ (film | async).rea.nomRea | uppercase}} &nbsp;&nbsp;&nbsp; Durée: {{(film | async).duree }} min</p>
-<p>Date de sortie: {{ (film | async).dateSortie| date:'d MMMM y' | date:'d MMMM y' }} </p>
-<p>Budget: {{(film | async).budget}}€ &nbsp;&nbsp;&nbsp;&nbsp;</p>
-<p>Recette: {{(film | async).montantRecette}} €</p>
-<p>Genre: {{ (film | async).cat.libelleCat}}</p>
-<img src="{{(film | async).cat.image}}">
+<p>{{ (filmInfo | async).rea.prenRea }} {{ (filmInfo | async).rea.nomRea | uppercase}} &nbsp;&nbsp;&nbsp; Durée: {{(filmInfo | async).duree }} min</p>
+<p>Date de sortie: {{ (filmInfo | async).dateSortie| date:'d MMMM y' | date:'d MMMM y' }} </p>
+<p>Budget: {{(filmInfo | async).budget}}€ &nbsp;&nbsp;&nbsp;&nbsp;</p>
+<p>Recette: {{(filmInfo | async).montantRecette}} €</p>
+<p>Genre: {{ (filmInfo | async).cat.libelleCat}}</p>
+<img src="{{(filmInfo | async).cat.image}}">
 <br>
 <br>
 <h4>Personnages du Film: </h4>
-<button mat-button mat-flat-button color="primary" routerLink="/addPersoFilm/{{(film | async).noFilm}}">Ajouter</button>
+<button mat-button mat-flat-button color="primary" routerLink="/addPersoFilm/{{(filmInfo | async).noFilm}}">Ajouter</button>
 <table class="table" #mytable>
     <thead class="thead-dark">
     <tr>
@@ -19,12 +19,12 @@
     </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let perso of persos">
-            <td>{{ perso.nomAct|async }}</td>
-            <td>{{ perso.nomPerso }}</td>
+        <tr *ngFor="let perso of persos | async">
+            <td>{{ perso.noAct.prenAct+ ' ' + perso.noAct.nomAct }}</td>
+            <td>{{ perso.nomPers }}</td>
             <td>
-                <a [routerLink]="['/updatePersoFilm', perso.noFilm, perso.noAct,perso.nomPerso]"  class="btn btn-default btn-sm">Edit</a>
-                <a routerLink="./" (click) ="remove(perso)" class="btn btn-danger btn-sm">Delete</a>
+                <a [routerLink]="['/updatePersoFilm', perso.noFilm.noFilm, perso.noAct.noAct,perso.nomPers]"  class="btn btn-default btn-sm">Edit</a>
+                <a  (click) ="remove(perso)" class="btn btn-danger btn-sm">Delete</a>
             </td>
         </tr>
     </tbody>

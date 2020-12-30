@@ -39,7 +39,7 @@ public class FilmController {
         return mesFilms;
     }
 
-    @GetMapping("/getFilms/cat")
+    @PostMapping("/getFilms/cat")
     public List<Film> findAllFilmsByCat(@RequestParam("libelleCat") String libelleCat) {
         String destinationPage = "";
         System.out.println("libelleCat : " + libelleCat);
@@ -85,7 +85,7 @@ public class FilmController {
         return monFilm;
     }
 
-    @GetMapping("/getFilms/titre")
+    @PostMapping("/getFilms/titre")
     public List<Film> findFilmById(@RequestParam("titre") String titre) {
         String destinationPage = "";
         System.out.println("titre : " + titre);
@@ -101,7 +101,7 @@ public class FilmController {
     }
 
     @PostMapping("/getFilms/realisateur")
-    public List<Film> findAllFilmsByRealisateur(@RequestParam("nomOrPrenRea") String nomOrPrenRea,@RequestParam("prenRea") String prenRea) {
+    public List<Film> findAllFilmsByRealisateur(@RequestParam("nomOrPrenRea") String nomOrPrenRea) {
         String destinationPage = "";
         //System.out.println("nomAct : " + nomAct);
         List<Film> mesFilms = null;

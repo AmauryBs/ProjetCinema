@@ -15,30 +15,31 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
 
 
 
-    @Query(value = "Select F.NoFilm,F.Titre,F.Budget,F.Duree,F.MontantRecette,F.rea,F.DateSortie,F.cat " +
-            " from Film F"+
-            " where  F.LibelleCat LIKE %:libelleCat%",nativeQuery = true
+    @Query(value = "Select F.NoFilm,F.Titre,F.Budget,F.Duree,F.MontantRecette,F.noRea,F.DateSortie,F.codeCat " +
+            " from Film F" +
+            " Join Categorie C on C.codeCat=F.codeCat"+
+            " where  C.LibelleCat LIKE %:libelleCat%",nativeQuery = true
     )
     List<Film> getAllFilmsByCat(String libelleCat);
 
 
-    @Query(value="Select F.NoFilm,F.Titre,F.Budget,F.Duree,F.MontantRecette,F.DateSortie,F.cat,F.rea " +
+    @Query(value="Select F.NoFilm,F.Titre,F.Budget,F.Duree,F.MontantRecette,F.DateSortie,F.codeCat,F.NoRea" +
             " from Film F" +
-            " join Personnage P on P.film.NoFilm=F.NoFilm" +
-            " join Acteur A on P.act.NoAct=A.NoAct"+
+            " join Personnage P on P.NoFilm=F.NoFilm" +
+            " join Acteur A on P.NoAct=A.NoAct"+
             " where A.NomAct LIKE %:nomOrPrenAct% or A.PrenAct LIKE %:nomOrPrenAct%",nativeQuery = true
     )
     List<Film> getAllFilmsByActeur(String nomOrPrenAct);
 
 
-    @Query("Select F.NoFilm,F.Titre,F.Budget,F.Duree,F.MontantRecette,F.DateSortie,F.cat,F.rea " +
+    @Query("Select F.NoFilm,F.Titre,F.Budget,F.Duree,F.MontantRecette,F.DateSortie,F.rea,F.cat " +
             " from Film F" +
             " where F.NoFilm=:idFilm"
     )
     List<Film> getFilmById(int idFilm);
 
 
-    @Query(value = "Select F.NoFilm,F.Titre,F.Budget,F.Duree,F.MontantRecette,F.DateSortie,F.cat,F.rea " +
+    @Query(value = "Select F.NoFilm,F.Titre,F.Budget,F.Duree,F.MontantRecette,F.DateSortie,F.codeCat,F.NoRea " +
             " from Film F" +
             " where F.Titre LIKE %:titre%",nativeQuery = true
     )

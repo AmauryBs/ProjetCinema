@@ -15,20 +15,20 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
 
 
 
-    @Query("Select F.NoFilm,F.Titre,F.Budget,F.Duree,F.MontantRecette,F.rea,F.DateSortie,F.cat " +
+    @Query(value = "Select F.NoFilm,F.Titre,F.Budget,F.Duree,F.MontantRecette,F.rea,F.DateSortie,F.cat " +
             " from Film F"+
-            " where  F.cat.CodeCat LIKE %:codeCat%"
+            " where  F.LibelleCat LIKE %:libelleCat%",nativeQuery = true
     )
-    List<Film> getAllFilmsByCat(String codeCat);
+    List<Film> getAllFilmsByCat(String libelleCat);
 
 
-    @Query("Select F.NoFilm,F.Titre,F.Budget,F.Duree,F.MontantRecette,F.DateSortie,F.cat,F.rea " +
+    @Query(value="Select F.NoFilm,F.Titre,F.Budget,F.Duree,F.MontantRecette,F.DateSortie,F.cat,F.rea " +
             " from Film F" +
             " join Personnage P on P.film.NoFilm=F.NoFilm" +
             " join Acteur A on P.act.NoAct=A.NoAct"+
-            " where A.NomAct LIKE %:nomAct% and A.PrenAct LIKE %:prenAct%"
+            " where A.NomAct LIKE %:nomOrPrenAct% or A.PrenAct LIKE %:nomOrPrenAct%",nativeQuery = true
     )
-    List<Film> getAllFilmsByActeur(String nomAct,String prenAct);
+    List<Film> getAllFilmsByActeur(String nomOrPrenAct);
 
 
     @Query("Select F.NoFilm,F.Titre,F.Budget,F.Duree,F.MontantRecette,F.DateSortie,F.cat,F.rea " +
@@ -38,9 +38,9 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
     List<Film> getFilmById(int idFilm);
 
 
-    @Query("Select F.NoFilm,F.Titre,F.Budget,F.Duree,F.MontantRecette,F.DateSortie,F.cat,F.rea " +
+    @Query(value = "Select F.NoFilm,F.Titre,F.Budget,F.Duree,F.MontantRecette,F.DateSortie,F.cat,F.rea " +
             " from Film F" +
-            " where F.Titre LIKE %:titre%"
+            " where F.Titre LIKE %:titre%",nativeQuery = true
     )
     List<Film> getAllFilmsByTitle(String titre);
 
@@ -48,10 +48,10 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
     @Query(value="Select F.NoFilm,F.Titre,F.Budget,F.Duree,F.MontantRecette,F.DateSortie,F.CodeCat,F.NoRea " +
             " from Film F" +
             " join Realisateur R on R.NoRea =F.NoRea" +
-            " where R.NomRea LIKE %:nomRea% and R.PrenRea LIKE %:prenRea%",
+            " where R.NomRea LIKE %:nomOrPrenRea% or R.PrenRea LIKE %:nomOrPrenRea%",
             nativeQuery = true
     )
-    List<Film> getAllFilmsByRealisateur(String nomRea, String prenRea);
+    List<Film> getAllFilmsByRealisateur(String nomOrPrenRea);
 
 
     @Modifying

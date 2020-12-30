@@ -22,12 +22,12 @@ public class FilmService {
         return this.filmRepo.findAll();
     }
 
-    public List<Film> getAllFilmsByCat(String codeCat) {
-        return this.filmRepo.getAllFilmsByCat(codeCat);
+    public List<Film> getAllFilmsByCat(String libelleCat) {
+        return this.filmRepo.getAllFilmsByCat(libelleCat);
     }
 
-    public List<Film> getAllFilmsByActeur(String nomAct, String prenAct) {
-        return this.filmRepo.getAllFilmsByActeur(nomAct,prenAct);
+    public List<Film> getAllFilmsByActeur(String nomOrPrenAct) {
+        return this.filmRepo.getAllFilmsByActeur(nomOrPrenAct);
     }
 
     public Film getFilmById(int idFilm) {
@@ -40,8 +40,8 @@ public class FilmService {
         return this.filmRepo.getAllFilmsByTitle(titre);
     }
 
-    public List<Film> getAllFilmsByRealisateur(String nomRea, String prenRea) {
-        return this.filmRepo.getAllFilmsByRealisateur(nomRea,prenRea);
+    public List<Film> getAllFilmsByRealisateur(String nomOrPrenRea) {
+        return this.filmRepo.getAllFilmsByRealisateur(nomOrPrenRea);
     }
 
     public void addFilm( String titre, int duree, Date dateSortie, int budget, int montantRecette, int noRea, String codeCat) {

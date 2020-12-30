@@ -39,13 +39,13 @@ public class FilmController {
         return mesFilms;
     }
 
-    @GetMapping("/getFilms/cat/{codeCat}")
-    public List<Film> findAllFilmsByCat(@PathVariable(value = "codeCat") String codeCat) {
+    @GetMapping("/getFilms/cat")
+    public List<Film> findAllFilmsByCat(@RequestParam("libelleCat") String libelleCat) {
         String destinationPage = "";
-        System.out.println("codeCat : " + codeCat);
+        System.out.println("libelleCat : " + libelleCat);
         List<Film> mesFilms = null;
         try {
-            mesFilms = filmService.getAllFilmsByCat(codeCat);
+            mesFilms = filmService.getAllFilmsByCat(libelleCat);
         } catch (MonException e) {
             ResponseEntity.notFound().build();
         }catch (Exception e) {
@@ -55,12 +55,12 @@ public class FilmController {
     }
 
     @PostMapping("/getFilms/acteur")
-    public List<Film> findAllFilmsByActeur(@RequestParam("nomAct") String nomAct,@RequestParam("prenAct") String prenAct) {
+    public List<Film> findAllFilmsByActeur(@RequestParam("nomOrPrenAct") String nomOrPrenAct) {
         String destinationPage = "";
         //System.out.println("nomAct : " + nomAct);
         List<Film> mesFilms = null;
         try {
-            mesFilms = filmService.getAllFilmsByActeur(nomAct,prenAct);
+            mesFilms = filmService.getAllFilmsByActeur(nomOrPrenAct);
         } catch (MonException e) {
             ResponseEntity.notFound().build();
         }catch (Exception e) {
@@ -85,8 +85,8 @@ public class FilmController {
         return monFilm;
     }
 
-    @GetMapping("/getFilms/{titre}")
-    public List<Film> findFilmById(@PathVariable(value = "titre") String titre) {
+    @GetMapping("/getFilms/titre")
+    public List<Film> findFilmById(@RequestParam("titre") String titre) {
         String destinationPage = "";
         System.out.println("titre : " + titre);
         List<Film> mesFilms = null;
@@ -101,12 +101,12 @@ public class FilmController {
     }
 
     @PostMapping("/getFilms/realisateur")
-    public List<Film> findAllFilmsByRealisateur(@RequestParam("nomRea") String nomRea,@RequestParam("prenRea") String prenRea) {
+    public List<Film> findAllFilmsByRealisateur(@RequestParam("nomOrPrenRea") String nomOrPrenRea,@RequestParam("prenRea") String prenRea) {
         String destinationPage = "";
         //System.out.println("nomAct : " + nomAct);
         List<Film> mesFilms = null;
         try {
-            mesFilms = filmService.getAllFilmsByRealisateur(nomRea,prenRea);
+            mesFilms = filmService.getAllFilmsByRealisateur(nomOrPrenRea);
         } catch (MonException e) {
             ResponseEntity.notFound().build();
         }catch (Exception e) {

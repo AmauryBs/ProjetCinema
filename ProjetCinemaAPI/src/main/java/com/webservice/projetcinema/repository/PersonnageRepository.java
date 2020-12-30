@@ -42,7 +42,7 @@ public interface PersonnageRepository extends JpaRepository<Personnage, Long> {
             " from Personnage P" +
             " where P.NoAct=:noAct and P.NoFilm=:noFilm",nativeQuery = true
     )
-    List<Personnage> getPersonnageFromIds(int noFilm, int noAct);
+    Personnage getPersonnageFromIds(int noFilm, int noAct);
 
 
 

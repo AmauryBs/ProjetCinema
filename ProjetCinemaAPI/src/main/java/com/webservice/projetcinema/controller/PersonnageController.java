@@ -37,17 +37,17 @@ public class PersonnageController {
     }
 
     @PostMapping("/getPersonnageFromIds")
-    public List<Personnage> findPersonnageFromIds(@RequestParam("noFilm") int noFilm,@RequestParam("noAct") int noAct) {
+    public Personnage findPersonnageFromIds(@RequestParam("noFilm") int noFilm,@RequestParam("noAct") int noAct) {
         String destinationPage = "";
-        List<Personnage> mesPersos = null;
+        Personnage monPersos = null;
         try {
-            mesPersos = persService.getPersonnageFromIds(noFilm,noAct);
+            monPersos = persService.getPersonnageFromIds(noFilm,noAct);
         } catch (MonException e) {
             ResponseEntity.notFound().build();
         }catch (Exception e) {
             ResponseEntity.notFound().build();
         }
-        return mesPersos;
+        return monPersos;
     }
 
     @GetMapping("/getPersonnages/acteur/name/{nomAct}")
@@ -143,10 +143,10 @@ public class PersonnageController {
 
 
     @PutMapping("/modifPersonnage")
-    public void updatePersonnage(@RequestParam("noFilm") int noFilm,@RequestParam("noAct") int noAct,@RequestParam("nomPers") String nomPers)
+    public void updatePersonnage(@RequestParam("noFilmOld") int noFilmOld,@RequestParam("noActOld") int noActOld,@RequestParam("noFilm") int noFilm,@RequestParam("noAct") int noAct,@RequestParam("nomPers") String nomPers)
     {
         try {
-            persService.updatePersonnage(noFilm,noAct,nomPers);
+            persService.updatePersonnage(noFilmOld,noActOld,noFilm,noAct,nomPers);
         }
         catch (MonException e) {
 

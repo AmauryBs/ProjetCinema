@@ -38,9 +38,9 @@ public interface PersonnageRepository extends JpaRepository<Personnage, Long> {
     @Transactional
     void supprPers(int noFilm, int noAct);
 
-    @Query("Select P.NomPers " +
+    @Query(value= "Select P.NoFilm,P.NoAct,P.NomPers " +
             " from Personnage P" +
-            " where P.act.NoAct=:noAct and P.film.NoFilm=:noFilm"
+            " where P.NoAct=:noAct and P.NoFilm=:noFilm",nativeQuery = true
     )
     List<Personnage> getPersonnageFromIds(int noFilm, int noAct);
 

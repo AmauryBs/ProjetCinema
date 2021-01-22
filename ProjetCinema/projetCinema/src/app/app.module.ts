@@ -9,6 +9,7 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { FilmService } from './services/film.service';
 import { ActeurService } from './services/acteur.service';
+import { AlertModule } from './_alert';
 
 
 import { AuthComponent } from './auth/auth.component';
@@ -48,7 +49,9 @@ import {  HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AlertModule
+
   ],
   providers: [AuthService, AuthGuard,FilmService,ActeurService, PersonnageService],
   bootstrap: [AppComponent]

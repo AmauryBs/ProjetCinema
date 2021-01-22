@@ -6,6 +6,7 @@ import { Acteur } from '../models/acteur.model';
 import { ActeurService } from '../services/acteur.service';
 import { FilmService } from '../services/film.service';
 import { PersonnageService } from '../services/personnage.service';
+import { AlertService } from '../_alert';
 
 @Component({
   selector: 'app-update-perso-film',
@@ -18,7 +19,7 @@ export class UpdatePersoFilmComponent implements OnInit {
   acteurSubscription: Subscription;
   noFilm;noAct;nomPerso;
 
-  constructor(private acteurService:ActeurService, private personnageService: PersonnageService, private filmService: FilmService, private router: Router,  private route: ActivatedRoute) { }
+  constructor(private acteurService:ActeurService, private personnageService: PersonnageService, private filmService: FilmService, private router: Router,  private route: ActivatedRoute,protected alertService: AlertService) { }
 
   ngOnInit(): void {
     this.acteurSubscription = this.acteurService.acteurSubject.subscribe(
@@ -47,8 +48,9 @@ export class UpdatePersoFilmComponent implements OnInit {
     )
   }
   onSubmit(form: NgForm) {
-    console.log(form.value)
     this.personnageService.updatePerso(form.value).subscribe(res =>{console.log(res)
+      this.alertService.success('personnage mis à jour')
+
       this.router.navigate(["/films/"+form.value.noFilm]);
     })
   }

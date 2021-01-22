@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { PersonnageService } from '../services/personnage.service';
 import { Observable,of, Subscription } from 'rxjs';
 import { Film } from '../models/film.model';
+import { AlertService } from '../_alert';
 
 @Component({
   selector: 'app-modif-perso',
@@ -17,7 +18,7 @@ export class ModifPersoComponent implements OnInit, OnDestroy {
   filmSubscription: Subscription;
   noFilm;noAct;nomPerso;
   films
-  constructor(private acteurService:ActeurService, private personnageService: PersonnageService, private filmService: FilmService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private acteurService:ActeurService, private personnageService: PersonnageService, private filmService: FilmService, private router: Router, private route: ActivatedRoute,protected alertService: AlertService) { }
 
   ngOnInit(): void {
     this.filmSubscription = this.filmService.filmSubject.subscribe(
@@ -50,8 +51,8 @@ export class ModifPersoComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(form: NgForm) {
-    console.log(form.value)
     this.personnageService.updatePerso(form.value).subscribe(res =>{console.log(res)
+      this.alertService.success('personnage mis à jour')
       this.router.navigate(["/acteurs/"+form.value.noAct]);
     })
 

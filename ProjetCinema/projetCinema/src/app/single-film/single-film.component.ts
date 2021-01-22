@@ -8,6 +8,7 @@ import { Personnage } from '../models/personnage.model';
 import { ActeurService } from '../services/acteur.service';
 import { FilmService } from '../services/film.service';
 import { PersonnageService } from '../services/personnage.service';
+import { AlertService } from '../_alert';
 
 @Component({
   selector: 'app-single-film',
@@ -21,7 +22,7 @@ export class SingleFilmComponent implements OnInit {
   id
 
   constructor(private filmService: FilmService, private personnageService: PersonnageService,
-    private route: ActivatedRoute, private acteurService: ActeurService,private router: Router,) { }
+    private route: ActivatedRoute, private acteurService: ActeurService,private router: Router, protected alertService: AlertService) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -37,6 +38,7 @@ export class SingleFilmComponent implements OnInit {
 
   remove(perso){
     this.personnageService.removePerso(perso).subscribe(res =>{console.log(res)
+      this.alertService.success('personnage supprimé')
       this.personnageService.getPersoByFilm(+this.id).then((res:any)=>{
         this.persos=of(res)
         this.router.navigate(["/films/"+res[0].noFilm.noFilm]);

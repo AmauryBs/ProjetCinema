@@ -76,7 +76,6 @@ export class PersonnageService {
   
   updatePerso(persolist){
     let body = new HttpParams();
-    console.log(persolist)
     body = body.set('noFilmOld', persolist.oldPerso.noFilm);
     body = body.set('noActOld', persolist.oldPerso.noAct);
     body = body.set('noFilm', persolist.noFilm);

@@ -29,21 +29,52 @@ public class PersonnageService {
         this.persRepo.save(unPers);
     }
 
-    public void addPersonnage(int noFilm,int noAct, String nomPers) {
-        this.persRepo.addPersWithParams(noFilm, noAct,nomPers);
+    public String addPersonnage(int noFilm, int noAct, String nomPers) {
+        Personnage pers = this.getPersonnageFromIds(noFilm, noAct);
+        if(pers.getNoFilm().equals(null) && pers.getNoAct().equals(null) && pers.getNomPers().equals(null))
+        {
+            this.persRepo.addPersWithParams(noFilm, noAct,nomPers);
+            return "Insert success";
+        }
+        else
+        {
+            return "Cannot Insert";
+        }
+
     }
 
     public void supprPersonnageObjet(Personnage unPers) {
         this.persRepo.delete(unPers);
     }
 
-    public void supprPersonnage(int noFilm, int noAct) {
-        this.persRepo.supprPers(noFilm, noAct);
+    public String supprPersonnage(int noFilm, int noAct) {
+        Personnage pers = this.getPersonnageFromIds(noFilm, noAct);
+        if(pers.getNoFilm().getNoFilm()!=0 && pers.getNoAct().getNoAct()!=0 && pers.getNomPers()!="")
+        {
+            this.persRepo.supprPers(noFilm, noAct);
+            return "Delete success";
+        }
+        else
+        {
+            return "Cannot Delete";
+        }
+
     }
 
-    public void updatePersonnage(int noFilmOld, int noActOld, int noFilm, int noAct, String nomPers) {
-        this.persRepo.supprPers(noFilmOld, noActOld);
-        this.persRepo.addPersWithParams(noFilm, noAct,nomPers);
+    public String updatePersonnage(int noFilmOld, int noActOld, int noFilm, int noAct, String nomPers) {
+        Personnage pers = this.getPersonnageFromIds(noFilm, noAct);
+        if(!pers.getNoFilm().equals(null) && !pers.getNoAct().equals(null) && !pers.getNomPers().equals(null))
+        {
+            this.persRepo.supprPers(noFilmOld, noActOld);
+            this.persRepo.addPersWithParams(noFilm, noAct,nomPers);
+            return "Update Success";
+        }
+        else
+        {
+            this.persRepo.addPersWithParams(noFilm, noAct,nomPers);
+            return "Not Found, Inserted";
+        }
+
     }
 
     public Personnage getPersonnageFromIds(int noFilm, int noAct) {

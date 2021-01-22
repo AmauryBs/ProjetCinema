@@ -104,21 +104,21 @@ public class PersonnageController {
     }
 
     @PostMapping("/ajoutPersonnage")
-    public void ajouterUnPersonnage(@RequestParam("noFilm") int noFilm,@RequestParam("noAct") int noAct,@RequestParam("nomPers") String nomPers) {
-        String destinationPage = "";
-        System.out.println("noFilm="+noFilm+" noAct:"+noAct+" nomPers:"+nomPers);
+    public String ajouterUnPersonnage(@RequestParam("noFilm") int noFilm, @RequestParam("noAct") int noAct, @RequestParam("nomPers") String nomPers) {
+        //System.out.println("noFilm="+noFilm+" noAct:"+noAct+" nomPers:"+nomPers);
+        String resp = "Error";
         try {
-            persService.addPersonnage(noFilm,noAct,nomPers);
+            resp = persService.addPersonnage(noFilm,noAct,nomPers);
         } catch (MonException e) {
             ResponseEntity.notFound().build();
         }catch (Exception e) {
             ResponseEntity.notFound().build();
         }
+        return resp;
     }
 
     @PostMapping("/supprPersonnageObjet")
     public void supprUnPersonnage(@RequestBody Personnage unPers) {
-        String destinationPage = "";
         try {
             persService.supprPersonnageObjet(unPers);
         } catch (MonException e) {
@@ -129,24 +129,26 @@ public class PersonnageController {
     }
 
     @PostMapping("/supprPersonnage")
-    public void supprUnPersonnage(@RequestParam("noFilm") int noFilm,@RequestParam("noAct") int noAct) {
-        String destinationPage = "";
-        System.out.println("noFilm="+noFilm+" noAct:"+noAct);
+    public String supprUnPersonnage(@RequestParam("noFilm") int noFilm, @RequestParam("noAct") int noAct) {
+        //System.out.println("noFilm="+noFilm+" noAct:"+noAct);
+        String resp = "Error";
         try {
-            persService.supprPersonnage(noFilm,noAct);
+            resp = persService.supprPersonnage(noFilm,noAct);
         } catch (MonException e) {
             ResponseEntity.notFound().build();
         }catch (Exception e) {
             ResponseEntity.notFound().build();
         }
+        return resp;
     }
 
 
     @PutMapping("/modifPersonnage")
-    public void updatePersonnage(@RequestParam("noFilmOld") int noFilmOld,@RequestParam("noActOld") int noActOld,@RequestParam("noFilm") int noFilm,@RequestParam("noAct") int noAct,@RequestParam("nomPers") String nomPers)
+    public String updatePersonnage(@RequestParam("noFilmOld") int noFilmOld, @RequestParam("noActOld") int noActOld, @RequestParam("noFilm") int noFilm, @RequestParam("noAct") int noAct, @RequestParam("nomPers") String nomPers)
     {
+        String resp = "Error";
         try {
-            persService.updatePersonnage(noFilmOld,noActOld,noFilm,noAct,nomPers);
+            resp = persService.updatePersonnage(noFilmOld,noActOld,noFilm,noAct,nomPers);
         }
         catch (MonException e) {
 
@@ -157,5 +159,6 @@ public class PersonnageController {
             ResponseEntity.notFound().build();
         }
 
+        return resp;
     }
 }

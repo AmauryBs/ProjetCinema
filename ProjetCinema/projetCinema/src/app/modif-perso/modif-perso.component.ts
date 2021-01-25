@@ -51,7 +51,7 @@ export class ModifPersoComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(form: NgForm) {
-    this.personnageService.updatePerso(form.value).subscribe(res =>{console.log(res)
+    this.personnageService.updatePerso(form.value).then(res =>{console.log(res)
       this.alertService.success('personnage mis à jour')
       this.router.navigate(["/acteurs/"+form.value.noAct]);
     })

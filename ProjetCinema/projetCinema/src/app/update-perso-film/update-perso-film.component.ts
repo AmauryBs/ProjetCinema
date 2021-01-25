@@ -42,13 +42,12 @@ export class UpdatePersoFilmComponent implements OnInit {
         tempperso["titre"] = value.noFilm.titre
         tempperso["nomAct"] = value.noAct.nomAct
         tempperso["prenAct"] = value.noAct.prenAct
-        console.log(tempperso)
         this.perso = of(tempperso)
       }
     )
   }
   onSubmit(form: NgForm) {
-    this.personnageService.updatePerso(form.value).subscribe(res =>{console.log(res)
+    this.personnageService.updatePerso(form.value).then(res =>{console.log(res)
       this.alertService.success('personnage mis à jour')
 
       this.router.navigate(["/films/"+form.value.noFilm]);

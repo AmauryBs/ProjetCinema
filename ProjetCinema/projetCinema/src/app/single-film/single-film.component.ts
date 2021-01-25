@@ -37,7 +37,7 @@ export class SingleFilmComponent implements OnInit {
   }
 
   remove(perso){
-    this.personnageService.removePerso(perso).subscribe(res =>{console.log(res)
+    this.personnageService.removePerso(perso).then(res =>{console.log(res)
       this.alertService.success('personnage supprimé')
       this.personnageService.getPersoByFilm(+this.id).then((res:any)=>{
         this.persos=of(res)

@@ -34,7 +34,7 @@ export class AddPersoFilmComponent implements OnInit, OnDestroy {
     )
   }
   onSubmit(form: NgForm) {
-    this.personnageService.addPerso(form.value).subscribe(res =>{console.log(res)
+    this.personnageService.addPerso(form.value).then(res =>{console.log(res)
       this.alertService.success('personnage créé')
       this.router.navigate(["/films/"+form.value.noFilm]);})
   }

@@ -17,7 +17,7 @@ Il permet de églaement la recherche de films par réalisateur/titre
   - Ouvrir un cmd ou un PowerShell
   - Se placer dans le dossier ProjetCinemaAPI/ du projet
   - Executer la commande :
-  `java -jar .\ProjetCinemaAPI-1.0-SNAPSHOT.jar`
+  `java -jar .\target\ProjetCinemaAPI-1.0-SNAPSHOT.jar`
   ## Client
   - Pour lancer le site web il suffit de se mettre dans ProjetCinema/ProjetCinema et de lancer la commande ng serve
   - Vous vous trouverez alors sur une page de connexion, vous devez vous identifier avant d'accéder au reste du site.

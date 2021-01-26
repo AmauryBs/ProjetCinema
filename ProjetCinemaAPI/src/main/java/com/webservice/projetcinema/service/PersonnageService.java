@@ -31,14 +31,16 @@ public class PersonnageService {
 
     public String addPersonnage(int noFilm, int noAct, String nomPers) {
         Personnage pers = this.getPersonnageFromIds(noFilm, noAct);
-        if(pers.getNoFilm().equals(null) && pers.getNoAct().equals(null) && pers.getNomPers().equals(null))
+        System.out.println(pers);
+        if(pers==null)
         {
+            System.out.println("oIHBNJHBn");
             this.persRepo.addPersWithParams(noFilm, noAct,nomPers);
-            return "Insert success";
+            return "Success";
         }
         else
         {
-            return "Cannot Insert, personnage already exists";
+            return "Already exists";
         }
 
     }
@@ -52,11 +54,11 @@ public class PersonnageService {
         if(pers.getNoFilm().getNoFilm()!=0 && pers.getNoAct().getNoAct()!=0 && pers.getNomPers()!="")
         {
             this.persRepo.supprPers(noFilm, noAct);
-            return "Delete success";
+            return "Success";
         }
         else
         {
-            return "Cannot Delete";
+            return "Not found";
         }
 
     }
@@ -67,7 +69,7 @@ public class PersonnageService {
         {
             this.persRepo.supprPers(noFilmOld, noActOld);
             this.persRepo.addPersWithParams(noFilm, noAct,nomPers);
-            return "Update Success";
+            return "Success";
         }
         else
         {

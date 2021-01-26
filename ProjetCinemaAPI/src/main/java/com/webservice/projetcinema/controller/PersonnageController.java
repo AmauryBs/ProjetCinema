@@ -1,5 +1,6 @@
 package com.webservice.projetcinema.controller;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.webservice.projetcinema.exceptions.MonException;
 import com.webservice.projetcinema.model.Personnage;
 import com.webservice.projetcinema.service.PersonnageService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -91,22 +93,12 @@ public class PersonnageController {
         }
         return mesPersos;
     }
-    @PostMapping("/ajoutPersonnageObjet")
-    public void ajouterUnPersonnage(@RequestBody Personnage unPers) {
-        String destinationPage = "";
-        try {
-            persService.addPersonnageObjet(unPers);
-        } catch (MonException e) {
-            ResponseEntity.notFound().build();
-        }catch (Exception e) {
-            ResponseEntity.notFound().build();
-        }
-    }
 
     @PostMapping("/ajoutPersonnage")
-    public String ajouterUnPersonnage(@RequestParam("noFilm") int noFilm, @RequestParam("noAct") int noAct, @RequestParam("nomPers") String nomPers) {
+    public HashMap<String, String> ajouterUnPersonnage(@RequestParam("noFilm") int noFilm, @RequestParam("noAct") int noAct, @RequestParam("nomPers") String nomPers) {
         //System.out.println("noFilm="+noFilm+" noAct:"+noAct+" nomPers:"+nomPers);
         String resp = "Error!";
+        HashMap<String, String> jsonLike = new HashMap<>();
         try {
             resp = persService.addPersonnage(noFilm,noAct,nomPers);
         } catch (MonException e) {
@@ -114,24 +106,15 @@ public class PersonnageController {
         }catch (Exception e) {
             ResponseEntity.notFound().build();
         }
-        return resp;
-    }
-
-    @PostMapping("/supprPersonnageObjet")
-    public void supprUnPersonnage(@RequestBody Personnage unPers) {
-        try {
-            persService.supprPersonnageObjet(unPers);
-        } catch (MonException e) {
-            ResponseEntity.notFound().build();
-        }catch (Exception e) {
-            ResponseEntity.notFound().build();
-        }
+        jsonLike.put("message", resp);
+        return jsonLike;
     }
 
     @PostMapping("/supprPersonnage")
-    public synchronized String supprUnPersonnage(@RequestParam("noFilm") int noFilm, @RequestParam("noAct") int noAct) {
+    public HashMap<String, String> supprUnPersonnage(@RequestParam("noFilm") int noFilm, @RequestParam("noAct") int noAct) {
         //System.out.println("noFilm="+noFilm+" noAct:"+noAct);
         String resp = "Error !";
+        HashMap<String, String> jsonLike = new HashMap<>();
         try {
             resp = persService.supprPersonnage(noFilm,noAct);
         } catch (MonException e) {
@@ -139,15 +122,19 @@ public class PersonnageController {
         }catch (Exception e) {
             ResponseEntity.notFound().build();
         }
-        return resp;
+        jsonLike.put("message", resp);
+        return jsonLike;
     }
 
 
     @PutMapping("/modifPersonnage")
-    public synchronized String updatePersonnage(@RequestParam("noFilmOld") int noFilmOld, @RequestParam("noActOld") int noActOld, @RequestParam("noFilm") int noFilm, @RequestParam("noAct") int noAct, @RequestParam("nomPers") String nomPers)
+    public HashMap<String, String> updatePersonnage(@RequestParam("noFilmOld") int noFilmOld, @RequestParam("noActOld") int noActOld, @RequestParam("noFilm") int noFilm, @RequestParam("noAct") int noAct, @RequestParam("nomPers") String nomPers)
     {
         String resp = "Error !";
+        HashMap<String, String> jsonLike = new HashMap<>();
+
         try {
+
             resp = persService.updatePersonnage(noFilmOld,noActOld,noFilm,noAct,nomPers);
         }
         catch (MonException e) {
@@ -158,7 +145,7 @@ public class PersonnageController {
 
             ResponseEntity.notFound().build();
         }
-
-        return resp;
+        jsonLike.put("message", resp);
+        return jsonLike;
     }
 }

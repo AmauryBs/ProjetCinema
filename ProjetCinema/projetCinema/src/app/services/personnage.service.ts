@@ -68,10 +68,19 @@ export class PersonnageService {
     let body = new HttpParams();
     body = body.set('noFilm', perso.noFilm.noFilm);
     body = body.set('noAct',  perso.noAct.noAct);
-    return this.httpClient
-      .post('http://localhost:8080/supprPersonnage', body)
-      .pipe(
-        );
+    const promise = new Promise((resolve, reject) => { 
+      this.httpClient.post<any[]>('http://localhost:8080/supprPersonnage',body)
+    .toPromise()
+    .then((res: any) => {
+      const data = res
+      resolve(data);
+    },
+    err => {
+        reject(err)
+      }
+    );
+  });
+  return promise    
   }
   
   updatePerso(persolist){
@@ -81,10 +90,20 @@ export class PersonnageService {
     body = body.set('noFilm', persolist.noFilm);
     body = body.set('noAct',  persolist.noAct);
     body = body.set('nomPers', persolist.nomPerso);
-    return this.httpClient
-      .put('http://localhost:8080/modifPersonnage', body)
-      .pipe(
-      );
+
+    const promise = new Promise((resolve, reject) => { 
+      this.httpClient.put<any[]>('http://localhost:8080/modifPersonnage',body)
+    .toPromise()
+    .then((res: any) => {
+      const data = res
+      resolve(data);
+    },
+    err => {
+        reject(err)
+      }
+    );
+  });
+  return promise    
   }
 
   addPerso(newPerso){
@@ -92,10 +111,18 @@ export class PersonnageService {
     body = body.set('noFilm', newPerso.noFilm);
     body = body.set('noAct',  newPerso.noAct);
     body = body.set('nomPers', newPerso.nomPerso);
-    return this.httpClient
-      .post('http://localhost:8080/ajoutPersonnage', body)
-      .pipe(
-      );
-
+    const promise = new Promise((resolve, reject) => { 
+      this.httpClient.post<any[]>('http://localhost:8080/ajoutPersonnage',body)
+    .toPromise()
+    .then((res: any) => {
+      const data = res
+      resolve(data);
+    },
+    err => {
+        reject(err)
+      }
+    );
+    });
+    return promise    
   }
 }

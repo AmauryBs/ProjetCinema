@@ -37,8 +37,12 @@ export class SingleFilmComponent implements OnInit {
   }
 
   remove(perso){
-    this.personnageService.removePerso(perso).subscribe(res =>{console.log(res)
-      this.alertService.success('personnage supprimé')
+    this.personnageService.removePerso(perso).then(res =>{console.log(res)
+      var options = {
+        autoClose: true,
+        keepAfterRouteChange: false
+    };
+      this.alertService.success('personnage supprimé',options)
       this.personnageService.getPersoByFilm(+this.id).then((res:any)=>{
         this.persos=of(res)
         this.router.navigate(["/films/"+res[0].noFilm.noFilm]);

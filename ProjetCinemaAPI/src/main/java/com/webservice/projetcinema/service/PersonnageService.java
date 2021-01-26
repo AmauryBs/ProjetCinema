@@ -31,10 +31,8 @@ public class PersonnageService {
 
     public String addPersonnage(int noFilm, int noAct, String nomPers) {
         Personnage pers = this.getPersonnageFromIds(noFilm, noAct);
-        System.out.println(pers);
         if(pers==null)
         {
-            System.out.println("oIHBNJHBn");
             this.persRepo.addPersWithParams(noFilm, noAct,nomPers);
             return "Success";
         }

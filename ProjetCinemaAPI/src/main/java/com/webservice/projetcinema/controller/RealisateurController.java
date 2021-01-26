@@ -26,7 +26,6 @@ public class RealisateurController {
 
     @GetMapping("/getRealisateurs")
     public List<Realisateur> findAllRealiateurs() {
-        String destinationPage = "";
         List<Realisateur> mesRealisateurs = null;
         try {
             mesRealisateurs = reaService.getAllRealiateurs();

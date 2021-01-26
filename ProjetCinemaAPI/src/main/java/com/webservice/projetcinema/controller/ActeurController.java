@@ -24,7 +24,6 @@ public class ActeurController {
 
     @GetMapping("/getActeurs")
     public List<Acteur> findAllActeurs() {
-        String destinationPage = "";
         List<Acteur> mesActeurs = null;
         try {
             mesActeurs = actService.getAllActeurs();
@@ -38,7 +37,6 @@ public class ActeurController {
 
     @GetMapping("/getActeur/{noAct}")
     public Acteur findActeurById(@PathVariable(value = "noAct") int noAct) {
-        String destinationPage = "";
         Acteur mesActeurs = null;
         try {
             mesActeurs = actService.getActeurById(noAct);

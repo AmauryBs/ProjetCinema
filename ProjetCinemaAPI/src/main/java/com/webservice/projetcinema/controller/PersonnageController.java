@@ -26,7 +26,6 @@ public class PersonnageController {
 
     @GetMapping("/getPersonnages")
     public List<Personnage> findAllPersonnages() {
-        String destinationPage = "";
         List<Personnage> mesPersos = null;
         try {
             mesPersos = persService.getAllPersonnages();
@@ -40,7 +39,6 @@ public class PersonnageController {
 
     @PostMapping("/getPersonnageFromIds")
     public Personnage findPersonnageFromIds(@RequestParam("noFilm") int noFilm,@RequestParam("noAct") int noAct) {
-        String destinationPage = "";
         Personnage monPersos = null;
         try {
             monPersos = persService.getPersonnageFromIds(noFilm,noAct);
@@ -54,7 +52,6 @@ public class PersonnageController {
 
     @GetMapping("/getPersonnages/acteur/name/{nomAct}")
     public List<Personnage> findAllPersonnagesOfActeurName(@PathVariable(value = "nomAct") String nomAct) {
-        String destinationPage = "";
         List<Personnage> mesPersos = null;
         try {
             mesPersos = persService.getAllPersonnagesOfActeurName(nomAct);
@@ -68,7 +65,6 @@ public class PersonnageController {
 
     @GetMapping("/getPersonnages/film/{noFilm}")
     public List<Personnage> findAllPersonnagesOfFilm(@PathVariable(value = "noFilm") int noFilm) {
-        String destinationPage = "";
         List<Personnage> mesPersos = null;
         try {
             mesPersos = persService.getAllPersonnagesOfFilm(noFilm);
@@ -82,7 +78,6 @@ public class PersonnageController {
 
     @GetMapping("/getPersonnages/acteur/{noAct}")
     public List<Personnage> findAllPersonnagesOfActeur(@PathVariable(value = "noAct") int noAct) {
-        String destinationPage = "";
         List<Personnage> mesPersos = null;
         try {
             mesPersos = persService.getAllPersonnagesOfActeur(noAct);
@@ -96,9 +91,7 @@ public class PersonnageController {
 
     @PostMapping("/ajoutPersonnage")
     public HashMap<String, String> ajouterUnPersonnage(@RequestParam("noFilm") int noFilm, @RequestParam("noAct") int noAct, @RequestParam("nomPers") String nomPers) {
-        //System.out.println("noFilm="+noFilm+" noAct:"+noAct+" nomPers:"+nomPers);
         String resp = "Error!";
-        System.out.println("NTM");
         HashMap<String, String> jsonLike = new HashMap<>();
         try {
             resp = persService.addPersonnage(noFilm,noAct,nomPers);
@@ -114,7 +107,6 @@ public class PersonnageController {
 
     @PostMapping("/supprPersonnage")
     public HashMap<String, String> supprUnPersonnage(@RequestParam("noFilm") int noFilm, @RequestParam("noAct") int noAct) {
-        //System.out.println("noFilm="+noFilm+" noAct:"+noAct);
         String resp = "Error !";
         HashMap<String, String> jsonLike = new HashMap<>();
         try {

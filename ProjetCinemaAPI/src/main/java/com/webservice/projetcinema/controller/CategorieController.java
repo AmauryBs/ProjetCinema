@@ -25,7 +25,6 @@ public class CategorieController {
 
     @GetMapping("/getCategories")
     public List<Categorie> findAllCategories() {
-        String destinationPage = "";
         List<Categorie> mesCategories = null;
         try {
             mesCategories = catService.getAllCategories();

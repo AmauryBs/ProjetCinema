@@ -27,7 +27,6 @@ public class FilmController {
 
     @GetMapping("/getFilms")
     public List<Film> findAllFilms() {
-        String destinationPage = "";
         List<Film> mesFilms = null;
         try {
             mesFilms = filmService.getAllFilms();
@@ -41,8 +40,6 @@ public class FilmController {
 
     @PostMapping("/getFilms/cat")
     public List<Film> findAllFilmsByCat(@RequestParam("libelleCat") String libelleCat) {
-        String destinationPage = "";
-        System.out.println("libelleCat : " + libelleCat);
         List<Film> mesFilms = null;
         try {
             mesFilms = filmService.getAllFilmsByCat(libelleCat);
@@ -56,8 +53,6 @@ public class FilmController {
 
     @PostMapping("/getFilms/acteur")
     public List<Film> findAllFilmsByActeur(@RequestParam("nomOrPrenAct") String nomOrPrenAct) {
-        String destinationPage = "";
-        //System.out.println("nomAct : " + nomAct);
         List<Film> mesFilms = null;
         try {
             mesFilms = filmService.getAllFilmsByActeur(nomOrPrenAct);
@@ -71,8 +66,6 @@ public class FilmController {
 
     @GetMapping("/getFilm/{idFilm}")
     public Film findFilmById(@PathVariable(value = "idFilm") int idFilm) {
-        String destinationPage = "";
-        System.out.println("idFilm : " + idFilm);
         Film monFilm = null;
         try {
             monFilm =  filmService.getFilmById(idFilm);
@@ -81,14 +74,11 @@ public class FilmController {
         }catch (Exception e) {
             ResponseEntity.notFound().build();
         }
-        System.out.println("idFilm ? : " + monFilm);
         return monFilm;
     }
 
     @PostMapping("/getFilms/titre")
     public List<Film> findFilmById(@RequestParam("titre") String titre) {
-        String destinationPage = "";
-        System.out.println("titre : " + titre);
         List<Film> mesFilms = null;
         try {
             mesFilms = filmService.getAllFilmsByTitle(titre);
@@ -102,8 +92,6 @@ public class FilmController {
 
     @PostMapping("/getFilms/realisateur")
     public List<Film> findAllFilmsByRealisateur(@RequestParam("nomOrPrenRea") String nomOrPrenRea) {
-        String destinationPage = "";
-        //System.out.println("nomAct : " + nomAct);
         List<Film> mesFilms = null;
         try {
             mesFilms = filmService.getAllFilmsByRealisateur(nomOrPrenRea);
@@ -126,10 +114,6 @@ public class FilmController {
                                     @RequestParam("noRea") int noRea,
                                     @RequestParam("codeCat") String codeCat
                                     ) {
-        String destinationPage = "";
-        System.out.println(" titre : " + titre+" duree : " + duree+" dateSortie : " + dateSortie+" budget : " + budget+" montantRecette : " + montantRecette+
-                " noRea : " + noRea+
-                " codeCat : " + codeCat);
         try {
            filmService.addFilm(titre,duree,dateSortie,budget,montantRecette,noRea,codeCat);
         } catch (MonException e) {
@@ -142,8 +126,6 @@ public class FilmController {
 
     @PostMapping("/supprFilm")
     public void supprUnPersonnage(@RequestParam("noFilm") int noFilm) {
-        String destinationPage = "";
-        System.out.println("noFilm="+noFilm);
         try {
             filmService.supprFilm(noFilm);
         } catch (MonException e) {

@@ -2,7 +2,7 @@
 Il s'agit d'un site web permettant de consulter une présentation de plusieurs films français. 
 Il permet de consulter la page d'un film ou d'un acteur pour voir les informations concernant ceux-ci. 
 Il permet l'ajout/modification/suppression d'un personnage au niveau de la page d'un film ou de la page d'un acteur. 
-Il permet de églaement la recherche de films par réalisateur/titre
+Il permet de églaement la recherche de films par réalisateur/titre/genre/acteur
 
 # Technologies utilisés
 - API REST: SpringBoot

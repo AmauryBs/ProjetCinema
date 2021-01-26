@@ -98,9 +98,11 @@ public class PersonnageController {
     public HashMap<String, String> ajouterUnPersonnage(@RequestParam("noFilm") int noFilm, @RequestParam("noAct") int noAct, @RequestParam("nomPers") String nomPers) {
         //System.out.println("noFilm="+noFilm+" noAct:"+noAct+" nomPers:"+nomPers);
         String resp = "Error!";
+        System.out.println("NTM");
         HashMap<String, String> jsonLike = new HashMap<>();
         try {
             resp = persService.addPersonnage(noFilm,noAct,nomPers);
+
         } catch (MonException e) {
             ResponseEntity.notFound().build();
         }catch (Exception e) {

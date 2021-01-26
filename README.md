@@ -22,5 +22,5 @@ Il permet de églaement la recherche de films par réalisateur/titre
   - Pour lancer le site web il suffit de se mettre dans ProjetCinema/ProjetCinema et de lancer la commande ng serve
   - Vous vous trouverez alors sur une page de connexion, vous devez identifier avant d'accéder au reste du site.
 
-<br>Et voilà! Vous avez accès au site</br>
+<b>Et voilà! Vous avez accès au site</b>
 

@@ -47,11 +47,24 @@ export class UpdatePersoFilmComponent implements OnInit {
     )
   }
   onSubmit(form: NgForm) {
-    this.personnageService.updatePerso(form.value).then(res =>{console.log(res)
-      this.alertService.success('personnage mis à jour')
+    if(form.value.nomPerso==''){
+      var options = {
+        autoClose: true,
+        keepAfterRouteChange: false
+    };
+      this.alertService.error('Veuillez entrer un nom de personnage',options) 
+    }
+    else{
+      this.personnageService.updatePerso(form.value).then(res =>{console.log(res)
+        var options = {
+          autoClose: true,
+          keepAfterRouteChange: true
+        };
+        this.alertService.success('personnage mis à jour',options)
 
-      this.router.navigate(["/films/"+form.value.noFilm]);
-    })
+        this.router.navigate(["/films/"+form.value.noFilm]);
+      })
+    }
   }
 }
 

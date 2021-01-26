@@ -34,10 +34,24 @@ export class AddPersoComponent implements OnInit, OnDestroy {
     )
   }
   onSubmit(form: NgForm) {
-    this.personnageService.addPerso(form.value).then(res =>{console.log(res)
-      this.alertService.success('personnage créé')
-      this.router.navigate(["/acteurs/"+form.value.noAct]);
-    })
+    console.log(form.value.nomPerso)
+    if(form.value.nomPerso==''){
+      var options = {
+        autoClose: true,
+        keepAfterRouteChange: false
+    };
+      this.alertService.error('Veuillez entrer un nom de personnage',options) 
+    }
+    else{
+      this.personnageService.addPerso(form.value).then(res =>{console.log(res)
+        var options = {
+          autoClose: true,
+          keepAfterRouteChange: true
+      };
+        this.alertService.success('personnage créé',options) 
+        this.router.navigate(["/acteurs/"+form.value.noAct]);
+      })
+    }
   }
 
   ngOnDestroy(){

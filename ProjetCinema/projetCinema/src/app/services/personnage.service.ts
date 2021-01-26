@@ -90,8 +90,9 @@ export class PersonnageService {
     body = body.set('noFilm', persolist.noFilm);
     body = body.set('noAct',  persolist.noAct);
     body = body.set('nomPers', persolist.nomPerso);
+
     const promise = new Promise((resolve, reject) => { 
-      this.httpClient.post<any[]>('http://localhost:8080/modifPersonnage',body)
+      this.httpClient.put<any[]>('http://localhost:8080/modifPersonnage',body)
     .toPromise()
     .then((res: any) => {
       const data = res

@@ -9,6 +9,7 @@ import { ActeurService } from '../services/acteur.service';
 import { FilmService } from '../services/film.service';
 import { PersonnageService } from '../services/personnage.service';
 import { AlertService } from '../_alert';
+import { Message } from '../models/message.model';
 
 @Component({
   selector: 'app-single-film',
@@ -37,15 +38,15 @@ export class SingleFilmComponent implements OnInit {
   }
 
   remove(perso){
-    this.personnageService.removePerso(perso).then(res =>{console.log(res)
+    this.personnageService.removePerso(perso).then((res:Message) =>{
       var options = {
         autoClose: true,
         keepAfterRouteChange: false
       };
-      if(res=="Success"){
+      if(res.message=="Success"){
         this.alertService.success('personnage supprimé',options)
       }else{
-        this.alertService.success("erreur, impossible de supprimer ce personnage",options)
+        this.alertService.error("erreur, impossible de supprimer ce personnage",options)
       }
       this.personnageService.getPersoByFilm(+this.id).then((res:any)=>{
         this.persos=of(res)

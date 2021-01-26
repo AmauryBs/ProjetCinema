@@ -7,6 +7,7 @@ import { PersonnageService } from '../services/personnage.service';
 import { FilmService } from '../services/film.service';
 import { Observable, of } from "rxjs";
 import { AlertService } from '../_alert';
+import { Message } from '../models/message.model';
 
 
 @Component({
@@ -35,15 +36,15 @@ export class SingleActeurComponent implements OnInit {
   }
 
   remove(perso){
-    this.personnageService.removePerso(perso).then(res =>{console.log(res)
+    this.personnageService.removePerso(perso).then((res:Message) =>{
       var options = {
         autoClose: true,
         keepAfterRouteChange: false
       };
-      if(res=="Success"){
+      if(res.message=="Success"){
         this.alertService.success('personnage supprimé',options)
       }else{
-        this.alertService.success("erreur, impossible de supprimer ce personnage",options)
+        this.alertService.error("erreur, impossible de supprimer ce personnage",options)
       }
       this.personnageService.getPersoByActeur(+this.id).then((res:any)=>{
         this.persos=of(res) 

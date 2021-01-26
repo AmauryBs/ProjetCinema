@@ -7,6 +7,7 @@ import { PersonnageService } from '../services/personnage.service';
 import { Observable,of, Subscription } from 'rxjs';
 import { Film } from '../models/film.model';
 import { AlertService } from '../_alert';
+import { Message } from '../models/message.model';
 
 @Component({
   selector: 'app-modif-perso',
@@ -49,6 +50,11 @@ export class ModifPersoComponent implements OnInit, OnDestroy {
   ngOnDestroy(){
     this.filmSubscription.unsubscribe()
   }
+  
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
 
   onSubmit(form: NgForm) {
     if(form.value.nomPerso==''){
@@ -59,19 +65,21 @@ export class ModifPersoComponent implements OnInit, OnDestroy {
       this.alertService.error('Veuillez entrer un nom de personnage',options) 
     }
     else{
-      this.personnageService.updatePerso(form.value).then(res =>{
+      this.personnageService.updatePerso(form.value).then(async (res:Message) =>{
         var options = {
           autoClose: true,
           keepAfterRouteChange: true
         };
-        if(res=="Success"){
+        if(res.message=="Success"){
           this.alertService.success('personnage mis à jour',options)
+          await this.delay(500)
           this.router.navigate(["/acteurs/"+form.value.noAct]);
-        }else if(res=="Inserted"){
-          this.alertService.success("personnage non trouvé, ajout d'un nouveau personnage",options)
+        }else if(res.message=="Not Found, Inserted"){
+          this.alertService.warn("personnage non trouvé, ajout d'un nouveau personnage",options)
+          await this.delay(500)
           this.router.navigate(["/acteurs/"+form.value.noAct]);
         }else{
-          this.alertService.success("erreur, impossible de modifier ce personnage",options)
+          this.alertService.error("erreur, impossible de modifier ce personnage",options)
         }
       })
     }

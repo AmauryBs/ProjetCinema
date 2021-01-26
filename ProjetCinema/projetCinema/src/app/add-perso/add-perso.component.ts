@@ -8,6 +8,7 @@ import { Observable, of, Subscription } from 'rxjs';
 import { Film } from '../models/film.model';
 import { Acteur } from '../models/acteur.model';
 import { AlertService } from '../_alert';
+import { Message } from '../models/message.model';
 
 @Component({
   selector: 'app-add-perso',
@@ -33,6 +34,11 @@ export class AddPersoComponent implements OnInit, OnDestroy {
     }
     )
   }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
   onSubmit(form: NgForm) {
     console.log(form.value.nomPerso)
     if(form.value.nomPerso==''){
@@ -43,19 +49,19 @@ export class AddPersoComponent implements OnInit, OnDestroy {
       this.alertService.error('Veuillez entrer un nom de personnage',options) 
     }
     else{
-      this.personnageService.addPerso(form.value).then(res =>{console.log(res)
+      this.personnageService.addPerso(form.value).then(async (res:Message) =>{
         var options = {
           autoClose: true,
           keepAfterRouteChange: true
         };
-        if(res=="Success"){
+        if(res.message=="Success"){
           this.alertService.success('personnage créé',options)
+          await this.delay(500)
           this.router.navigate(["/acteurs/"+form.value.noAct]);
-        }else if(res=="Cannot Insert"){
-          this.alertService.success("Un personnage avec cette Acteur et ce film existe déjà",options)
-          this.router.navigate(["/acteurs/"+form.value.noAct]);
+        }else if(res.message=="Already exists"){
+          this.alertService.warn("Un personnage avec cet acteur et ce film existe déjà",options)
         }else{
-          this.alertService.success("erreur, impossible d'ajouter ce personnage",options)
+          this.alertService.error("erreur, impossible d'ajouter ce personnage",options)
         }
       })
     }

@@ -7,6 +7,8 @@ import { PersonnageService } from '../services/personnage.service';
 import { Observable, of, Subscription } from 'rxjs';
 import { Film } from '../models/film.model';
 import { Acteur } from '../models/acteur.model';
+import { Message } from '../models/message.model';
+
 import { AlertService } from '../_alert';
 
 @Component({
@@ -20,6 +22,7 @@ export class AddPersoFilmComponent implements OnInit, OnDestroy {
   filmInfo: Observable<Film>;
   acteurs:Acteur[]
   acteurSubscription: Subscription;
+
   ngOnInit(): void {
     this.acteurSubscription = this.acteurService.acteurSubject.subscribe(
       (acteurs: Acteur[]) => {
@@ -33,6 +36,11 @@ export class AddPersoFilmComponent implements OnInit, OnDestroy {
     }
     )
   }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
   onSubmit(form: NgForm) {
     if(form.value.nomPerso==''){
       var options = {
@@ -42,19 +50,19 @@ export class AddPersoFilmComponent implements OnInit, OnDestroy {
       this.alertService.error('Veuillez entrer un nom de personnage', options) 
     }
     else{
-      this.personnageService.addPerso(form.value).then(res =>{console.log(res)
+      this.personnageService.addPerso(form.value).then(async (res:Message) =>{
         var options = {
           autoClose: true,
           keepAfterRouteChange: true
         };
-        if(res=="Success"){
+        if(res.message=="Success"){
           this.alertService.success('personnage créé',options)
+          await this.delay(500)
           this.router.navigate(["/films/"+form.value.noFilm])
-        }else if(res=="Cannot Insert"){
-          this.alertService.success("Un personnage avec cette Acteur et ce film existe déjà",options)
-          this.router.navigate(["/films/"+form.value.noFilm])
+        }else if(res.message=="Already exists"){
+          this.alertService.error("Un personnage avec cet acteur et ce film existe déjà",options)
         }else{
-          this.alertService.success("erreur, impossible d'ajouter ce personnage",options)
+          this.alertService.error("erreur, impossible d'ajouter ce personnage",options)
         }
       })
     }

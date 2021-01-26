@@ -11,9 +11,16 @@ Il permet de églaement la recherche de films par réalisateur/titre
 
 
 # Lancement du projet
-- Commencer par lancer votre base sql
-- Lancer l'API REST
-- Pour lancer le site web il suffit de se mettre dans ProjetCinema/ProjetCinema et de lancer la commande ng serve
-- Vous vous trouverez alors sur une page de connexion, vous devez identifier avant d'accéder au reste du site.
-- Et voilà! vous avez accès au site
+  ## BDD
+  Commencer par lancer votre base sql
+  ## API
+  - Ouvrir un cmd ou un PowerShell
+  - Se placer dans le dossier ProjetCinemaAPI/ du projet
+  - Executer la commande :
+  `java -jar .\ProjetCinemaAPI-1.0-SNAPSHOT.jar`
+  ## Client
+  - Pour lancer le site web il suffit de se mettre dans ProjetCinema/ProjetCinema et de lancer la commande ng serve
+  - Vous vous trouverez alors sur une page de connexion, vous devez vous identifier avant d'accéder au reste du site.
+
+<b>Et voilà! Vous avez accès au site</b>
 

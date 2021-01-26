@@ -60,9 +60,16 @@ export class UpdatePersoFilmComponent implements OnInit {
           autoClose: true,
           keepAfterRouteChange: true
         };
+        if(res=="Success"){
+          this.alertService.success('personnage mis à jour',options)
+          this.router.navigate(["/films/"+form.value.noFilm]);
+        }else if(res=="Inserted"){
+          this.alertService.success("personnage non trouvé, ajout d'un nouveau personnage",options)
+          this.router.navigate(["/films/"+form.value.noFilm]);
+        }else{
+          this.alertService.success("erreur, impossible de modifier ce personnage",options)
+        }
         this.alertService.success('personnage mis à jour',options)
-
-        this.router.navigate(["/films/"+form.value.noFilm]);
       })
     }
   }

@@ -59,15 +59,21 @@ export class ModifPersoComponent implements OnInit, OnDestroy {
       this.alertService.error('Veuillez entrer un nom de personnage',options) 
     }
     else{
-      this.personnageService.updatePerso(form.value).then(res =>{console.log(res)
+      this.personnageService.updatePerso(form.value).then(res =>{
         var options = {
           autoClose: true,
           keepAfterRouteChange: true
-      };
-        this.alertService.success('personnage mis à jour',options)
-        this.router.navigate(["/acteurs/"+form.value.noAct]);
+        };
+        if(res=="Success"){
+          this.alertService.success('personnage mis à jour',options)
+          this.router.navigate(["/acteurs/"+form.value.noAct]);
+        }else if(res=="Inserted"){
+          this.alertService.success("personnage non trouvé, ajout d'un nouveau personnage",options)
+          this.router.navigate(["/acteurs/"+form.value.noAct]);
+        }else{
+          this.alertService.success("erreur, impossible de modifier ce personnage",options)
+        }
       })
-
     }
   }
 }

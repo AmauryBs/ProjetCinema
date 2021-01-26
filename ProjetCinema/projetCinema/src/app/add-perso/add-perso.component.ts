@@ -47,9 +47,16 @@ export class AddPersoComponent implements OnInit, OnDestroy {
         var options = {
           autoClose: true,
           keepAfterRouteChange: true
-      };
-        this.alertService.success('personnage créé',options) 
-        this.router.navigate(["/acteurs/"+form.value.noAct]);
+        };
+        if(res=="Success"){
+          this.alertService.success('personnage créé',options)
+          this.router.navigate(["/acteurs/"+form.value.noAct]);
+        }else if(res=="Cannot Insert"){
+          this.alertService.success("Un personnage avec cette Acteur et ce film existe déjà",options)
+          this.router.navigate(["/acteurs/"+form.value.noAct]);
+        }else{
+          this.alertService.success("erreur, impossible d'ajouter ce personnage",options)
+        }
       })
     }
   }

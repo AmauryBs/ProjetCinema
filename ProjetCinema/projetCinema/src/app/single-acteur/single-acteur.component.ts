@@ -39,8 +39,12 @@ export class SingleActeurComponent implements OnInit {
       var options = {
         autoClose: true,
         keepAfterRouteChange: false
-    };
-      this.alertService.success('personnage supprimé',options)
+      };
+      if(res=="Success"){
+        this.alertService.success('personnage supprimé',options)
+      }else{
+        this.alertService.success("erreur, impossible de supprimer ce personnage",options)
+      }
       this.personnageService.getPersoByActeur(+this.id).then((res:any)=>{
         this.persos=of(res) 
       })

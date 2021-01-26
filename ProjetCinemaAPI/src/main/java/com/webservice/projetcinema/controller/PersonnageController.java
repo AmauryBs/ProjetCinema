@@ -106,7 +106,7 @@ public class PersonnageController {
     @PostMapping("/ajoutPersonnage")
     public String ajouterUnPersonnage(@RequestParam("noFilm") int noFilm, @RequestParam("noAct") int noAct, @RequestParam("nomPers") String nomPers) {
         //System.out.println("noFilm="+noFilm+" noAct:"+noAct+" nomPers:"+nomPers);
-        String resp = "Error";
+        String resp = "Error!";
         try {
             resp = persService.addPersonnage(noFilm,noAct,nomPers);
         } catch (MonException e) {
@@ -129,9 +129,9 @@ public class PersonnageController {
     }
 
     @PostMapping("/supprPersonnage")
-    public String supprUnPersonnage(@RequestParam("noFilm") int noFilm, @RequestParam("noAct") int noAct) {
+    public synchronized String supprUnPersonnage(@RequestParam("noFilm") int noFilm, @RequestParam("noAct") int noAct) {
         //System.out.println("noFilm="+noFilm+" noAct:"+noAct);
-        String resp = "Error";
+        String resp = "Error !";
         try {
             resp = persService.supprPersonnage(noFilm,noAct);
         } catch (MonException e) {
@@ -144,9 +144,9 @@ public class PersonnageController {
 
 
     @PutMapping("/modifPersonnage")
-    public String updatePersonnage(@RequestParam("noFilmOld") int noFilmOld, @RequestParam("noActOld") int noActOld, @RequestParam("noFilm") int noFilm, @RequestParam("noAct") int noAct, @RequestParam("nomPers") String nomPers)
+    public synchronized String updatePersonnage(@RequestParam("noFilmOld") int noFilmOld, @RequestParam("noActOld") int noActOld, @RequestParam("noFilm") int noFilm, @RequestParam("noAct") int noAct, @RequestParam("nomPers") String nomPers)
     {
-        String resp = "Error";
+        String resp = "Error !";
         try {
             resp = persService.updatePersonnage(noFilmOld,noActOld,noFilm,noAct,nomPers);
         }

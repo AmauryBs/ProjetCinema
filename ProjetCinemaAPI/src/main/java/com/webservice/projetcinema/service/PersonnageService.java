@@ -38,7 +38,7 @@ public class PersonnageService {
         }
         else
         {
-            return "Cannot Insert";
+            return "Cannot Insert, personnage already exists";
         }
 
     }

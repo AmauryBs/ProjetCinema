@@ -38,7 +38,7 @@ public class PersonnageService {
         }
         else
         {
-            return "Cannot Insert, personnage already exists";
+            return "Already exists";
         }
 
     }
@@ -56,7 +56,7 @@ public class PersonnageService {
         }
         else
         {
-            return "Cannot Delete";
+            return "Not found";
         }
 
     }

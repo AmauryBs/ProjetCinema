@@ -5,7 +5,7 @@ Il permet l'ajout/modification/suppression d'un personnage au niveau de la page 
 Il permet de églaement la recherche de films par réalisateur/titre/genre/acteur
 
 # Binôme
-Amaury Beuhorry
+Amaury Beuhorry<br>
 Anthony Marsura
 
 # Technologies utilisés

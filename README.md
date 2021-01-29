@@ -4,6 +4,10 @@ Il permet de consulter la page d'un film ou d'un acteur pour voir les informatio
 Il permet l'ajout/modification/suppression d'un personnage au niveau de la page d'un film ou de la page d'un acteur. 
 Il permet de églaement la recherche de films par réalisateur/titre/genre/acteur
 
+# Binôme
+Amaury Beuhorry
+Anthony Marsura
+
 # Technologies utilisés
 - API REST: SpringBoot
 - Base de données: SQL
